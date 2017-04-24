@@ -12,4 +12,5 @@ import java.util.Date;
  */
 public interface UserDao<T,ID extends Serializable> extends HibernateDao<T,ID> {
     UserEntity findByUserName(String hql,String username);
+    void delByUserName(String hql,String username);
 }

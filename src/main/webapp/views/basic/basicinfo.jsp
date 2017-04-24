@@ -38,6 +38,8 @@
             </li>
             <li class=""><a href="#clientinfo" data-toggle="tab" onclick="onClickCustomerNav()">客户信息管理</a>
             </li>
+            <li class=""><a href="#employee" data-toggle="tab" onclick="onClickEmployeeNav()">员工信息管理</a>
+            </li>
         </ul>
 
         <div class="tab-content">
@@ -67,12 +69,12 @@
 <script type="text/javascript" language="JavaScript">
 
     $(document).ready(function () {
-//        showTitle();
-//        getAllCategories();
-//
-//        $('#addProducerModal').on('hide.bs.modal', function () {
-//            resetProducerForm();
-//        });
+        showTitle();
+        getAllCategories();
+
+        $('#addProducerModal').on('hide.bs.modal', function () {
+            resetProducerForm();
+        });
     });
 </script>
 
