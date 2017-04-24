@@ -30,4 +30,9 @@ public class BasicInfoController extends BaseController{
     public String storage(){
         return "purchase/storage";
     }
+
+    @RequestMapping(value = {"/financial"}, method = RequestMethod.GET)
+    public String financial(){
+        return "financial/financial";
+    }
 }

@@ -12,6 +12,7 @@
     <mapping class="com.fzd.model.ProducerEntity"/>
     <mapping class="com.fzd.model.PurchasingEntity"/>
     <mapping class="com.fzd.model.SellEntity"/>
+    <mapping class="com.fzd.model.EmployeeEntity"/>
     <!-- DB schema will be updated if needed -->
     <!-- <property name="hbm2ddl.auto">update</property> -->
   </session-factory>

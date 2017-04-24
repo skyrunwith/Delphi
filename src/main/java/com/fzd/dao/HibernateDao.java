@@ -11,109 +11,109 @@ import java.util.List;
  */
 public interface HibernateDao <T, ID extends Serializable>{
     /**
-     * <±£´æÊµÌå>
-     * <ÍêÕû±£´æÊµÌå>
-     * @param t ÊµÌå²ÎÊı
+     * <ä¿å­˜å®ä½“>
+     * <å®Œæ•´ä¿å­˜å®ä½“>
+     * @param t å®ä½“å‚æ•°
      */
     public abstract void save(T t);
 
     /**
-     * <±£´æ»òÕß¸üĞÂÊµÌå>
-     * @param t ÊµÌå
+     * <ä¿å­˜æˆ–è€…æ›´æ–°å®ä½“>
+     * @param t å®ä½“
      */
     public abstract void saveOrUpdate(T t);
 
     /**
      * <load>
-     * <¼ÓÔØÊµÌåµÄload·½·¨>
-     * @param id ÊµÌåµÄid
-     * @return ²éÑ¯³öÀ´µÄÊµÌå
+     * <åŠ è½½å®ä½“çš„loadæ–¹æ³•>
+     * @param id å®ä½“çš„id
+     * @return æŸ¥è¯¢å‡ºæ¥çš„å®ä½“
      */
     public abstract T load(ID id);
 
     /**
      * <get>
-     * <²éÕÒµÄget·½·¨>
-     * @param id ÊµÌåµÄid
-     * @return ²éÑ¯³öÀ´µÄÊµÌå
+     * <æŸ¥æ‰¾çš„getæ–¹æ³•>
+     * @param id å®ä½“çš„id
+     * @return æŸ¥è¯¢å‡ºæ¥çš„å®ä½“
      */
     public abstract T get(ID id);
 
     /**
      * <contains>
-     * @param t ÊµÌå
-     * @return ÊÇ·ñ°üº¬
+     * @param t å®ä½“
+     * @return æ˜¯å¦åŒ…å«
      */
     public abstract boolean contains(T t);
 
     /**
      * <delete>
-     * <É¾³ı±íÖĞµÄtÊı¾İ>
-     * @param t ÊµÌå
+     * <åˆ é™¤è¡¨ä¸­çš„tæ•°æ®>
+     * @param t å®ä½“
      */
     public abstract void delete(T t);
 
     /**
-     * <¸ù¾İIDÉ¾³ıÊı¾İ>
-     * @param Id ÊµÌåid
-     * @return ÊÇ·ñÉ¾³ı³É¹¦
+     * <æ ¹æ®IDåˆ é™¤æ•°æ®>
+     * @param Id å®ä½“id
+     * @return æ˜¯å¦åˆ é™¤æˆåŠŸ
      */
     public abstract boolean deleteById(ID Id);
 
     /**
-     * <É¾³ıËùÓĞ>
-     * @param entities ÊµÌåµÄCollection¼¯ºÏ
+     * <åˆ é™¤æ‰€æœ‰>
+     * @param entities å®ä½“çš„Collectioné›†åˆ
      */
     public abstract void deleteAll(Collection<T> entities);
 
     /**
-     * <Ö´ĞĞHqlÓï¾ä>
+     * <æ‰§è¡ŒHqlè¯­å¥>
      * @param hqlString hql
-     * @param values ²»¶¨²ÎÊıÊı×é
+     * @param values ä¸å®šå‚æ•°æ•°ç»„
      */
     public abstract void queryHql(String hqlString, Object... values);
 
     /**
-     * <Ö´ĞĞSqlÓï¾ä>
+     * <æ‰§è¡ŒSqlè¯­å¥>
      * @param sqlString sql
-     * @param values ²»¶¨²ÎÊıÊı×é
+     * @param values ä¸å®šå‚æ•°æ•°ç»„
      */
     public abstract void querySql(String sqlString, Object... values);
 
     /**
-     * <¸ù¾İHQLÓï¾ä²éÕÒÎ¨Ò»ÊµÌå>
-     * @param hqlString HQLÓï¾ä
-     * @param values ²»¶¨²ÎÊıµÄObjectÊı×é
-     * @return ²éÑ¯ÊµÌå
+     * <æ ¹æ®HQLè¯­å¥æŸ¥æ‰¾å”¯ä¸€å®ä½“>
+     * @param hqlString HQLè¯­å¥
+     * @param values ä¸å®šå‚æ•°çš„Objectæ•°ç»„
+     * @return æŸ¥è¯¢å®ä½“
      */
     public abstract T getByHQL(String hqlString, Object... values);
 
     /**
-     * <¸ù¾İSQLÓï¾ä²éÕÒÎ¨Ò»ÊµÌå>
-     * @param sqlString SQLÓï¾ä
-     * @param values ²»¶¨²ÎÊıµÄObjectÊı×é
-     * @return ²éÑ¯ÊµÌå
+     * <æ ¹æ®SQLè¯­å¥æŸ¥æ‰¾å”¯ä¸€å®ä½“>
+     * @param sqlString SQLè¯­å¥
+     * @param values ä¸å®šå‚æ•°çš„Objectæ•°ç»„
+     * @return æŸ¥è¯¢å®ä½“
      */
     public abstract T getBySQL(String sqlString, Object... values);
 
     /**
-     * <¸ù¾İHQLÓï¾ä£¬µÃµ½¶ÔÓ¦µÄlist>
-     * @param hqlString HQLÓï¾ä
-     * @param values ²»¶¨²ÎÊıµÄObjectÊı×é
-     * @return ²éÑ¯¶à¸öÊµÌåµÄList¼¯ºÏ
+     * <æ ¹æ®HQLè¯­å¥ï¼Œå¾—åˆ°å¯¹åº”çš„list>
+     * @param hqlString HQLè¯­å¥
+     * @param values ä¸å®šå‚æ•°çš„Objectæ•°ç»„
+     * @return æŸ¥è¯¢å¤šä¸ªå®ä½“çš„Listé›†åˆ
      */
     public abstract List<T> getListByHQL(String hqlString, Object... values);
 
     /**
-     * <¸ù¾İSQLÓï¾ä£¬µÃµ½¶ÔÓ¦µÄlist>
-     * @param sqlString HQLÓï¾ä
-     * @param values ²»¶¨²ÎÊıµÄObjectÊı×é
-     * @return ²éÑ¯¶à¸öÊµÌåµÄList¼¯ºÏ
+     * <æ ¹æ®SQLè¯­å¥ï¼Œå¾—åˆ°å¯¹åº”çš„list>
+     * @param sqlString HQLè¯­å¥
+     * @param values ä¸å®šå‚æ•°çš„Objectæ•°ç»„
+     * @return æŸ¥è¯¢å¤šä¸ªå®ä½“çš„Listé›†åˆ
      */
     public abstract List<T> getListBySQL(String sqlString, Object... values);
 
     /**
-     * ÓÉsqlÓï¾äµÃµ½List
+     * ç”±sqlè¯­å¥å¾—åˆ°List
      * @param sql
      * @param map
      * @param values
@@ -123,32 +123,32 @@ public interface HibernateDao <T, ID extends Serializable>{
 
     /**
      * <refresh>
-     * @param t ÊµÌå
+     * @param t å®ä½“
      */
     public abstract void refresh(T t);
 
     /**
      * <update>
-     * @param t ÊµÌå
+     * @param t å®ä½“
      */
     public abstract void update(T t);
 
     /**
-     * <¸ù¾İHQLµÃµ½¼ÇÂ¼Êı>
-     * @param hql HQLÓï¾ä
-     * @param values ²»¶¨²ÎÊıµÄObjectÊı×é
-     * @return ¼ÇÂ¼×ÜÊı
+     * <æ ¹æ®HQLå¾—åˆ°è®°å½•æ•°>
+     * @param hql HQLè¯­å¥
+     * @param values ä¸å®šå‚æ•°çš„Objectæ•°ç»„
+     * @return è®°å½•æ€»æ•°
      */
     public abstract Long countByHql(String hql, Object... values);
 
     /**
-     * <HQL·ÖÒ³²éÑ¯>
-     * @param hql HQLÓï¾ä
-     * @param countHql ²éÑ¯¼ÇÂ¼ÌõÊıµÄHQLÓï¾ä
-     * @param pageNo ÏÂÒ»Ò³
-     * @param pageSize Ò»Ò³×ÜÌõÊı
-     * @param values ²»¶¨ObjectÊı×é²ÎÊı
-     * @return PageResultsµÄ·â×°Àà£¬ÀïÃæ°üº¬ÁËÒ³ÂëµÄĞÅÏ¢ÒÔ¼°²éÑ¯µÄÊı¾İList¼¯ºÏ
+     * <HQLåˆ†é¡µæŸ¥è¯¢>
+     * @param hql HQLè¯­å¥
+     * @param countHql æŸ¥è¯¢è®°å½•æ¡æ•°çš„HQLè¯­å¥
+     * @param pageNo ä¸‹ä¸€é¡µ
+     * @param pageSize ä¸€é¡µæ€»æ¡æ•°
+     * @param values ä¸å®šObjectæ•°ç»„å‚æ•°
+     * @return PageResultsçš„å°è£…ç±»ï¼Œé‡Œé¢åŒ…å«äº†é¡µç çš„ä¿¡æ¯ä»¥åŠæŸ¥è¯¢çš„æ•°æ®Listé›†åˆ
      */
     public abstract PageResults<T> findPageByFetchedHql(String hql, String countHql, int pageNo, int pageSize, Object... values);
 

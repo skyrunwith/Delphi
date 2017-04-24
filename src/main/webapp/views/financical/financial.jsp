@@ -1,3 +1,11 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: SRKJ
+  Date: 2017/4/24
+  Time: 18:16
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <% String basePath = request.getServletPath(); %>
@@ -17,49 +25,19 @@
             </button>
             <a class="navbar-brand">零食店进存销系统</a>
             <ul class="nav navbar-nav">
-                <li class="active" id="basicManage" onclick="onTitleClick('basicManage')"><a href="<c:url value='/basic/info'/> ">基础信息</a></li>
+                <li id="basicManage" onclick="onTitleClick('basicManage')"><a href="<c:url value='/basic/info'/> ">基础信息</a></li>
                 <li id="purchaseManage" onclick="onTitleClick('purchaseManage')"><a href="<c:url value='/basic/purchase'/> ">采购管理</a></li>
                 <li id="sellManage" onclick="onTitleClick('sellManage')"><a href="<c:url value='/basic/sell'/> ">销售管理</a></li>
                 <li id="storageManage" onclick="onTitleClick('storageManage')"><a href="<c:url value='/basic/storage'/> ">库存管理</a></li>
                 <li id="statistical" onclick="onTitleClick('statistical')"><a href="<c:url value='/basic/storage'/> ">统计管理</a></li>
-                <li id="financial" onclick="onTitleClick('financial')"><a href="<c:url value='/basic/storage'/> ">财务管理</a></li>
+                <li class="active" id="financial" onclick="onTitleClick('financial')"><a href="<c:url value='/basic/financial'/> ">财务管理</a></li>
             </ul>
         </div>
     </nav>
 </div>
 <div class="panel panel-default" style="margin: 5px;">
-    <div class="panel-body">
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="#categoryinfo" data-toggle="tab">分类信息管理</a>
-            </li>
-            <li class=""><a href="#goodsinfo" data-toggle="tab">商品信息管理</a>
-            </li>
-            <li class=""><a href="#producerinfo" data-toggle="tab" onclick="onClickProducerNav()">供应商信息管理</a>
-            </li>
-            <li class=""><a href="#clientinfo" data-toggle="tab" onclick="onClickCustomerNav()">客户信息管理</a>
-            </li>
-        </ul>
 
-        <div class="tab-content">
-            <div class="tab-pane fade active in" id="categoryinfo">
-                <c:import url="categoryinfo.jsp"></c:import>
-            </div>
-            <div class="tab-pane fade " id="goodsinfo">
-                <c:import url="goodsinfo.jsp"></c:import>
-            </div>
-            <div class="tab-pane fade" id="producerinfo">
-                <c:import url="producerinfo.jsp"></c:import>
-            </div>
-            <div class="tab-pane fade" id="clientinfo">
-                <c:import url="customerinfo.jsp"></c:import>
-            </div>
-
-            <div class="tab-pane fade" id="employee">
-                <c:import url="employee.jsp"></c:import>
-            </div>
-        </div>
-    </div>
-<jsp:include page="../templates/footer.jsp"></jsp:include>
+    <jsp:include page="../templates/footer.jsp"></jsp:include>
 
 </body>
 <script type="text/javascript" src="<c:url value="/static/custom/goods.js"/> "></script>
