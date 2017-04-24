@@ -7,22 +7,22 @@ import java.util.List;
  * Created by FZD on 2017/3/16.
  */
 public class PageResults<T> implements Serializable{
-    // ÏÂÒ»Ò³
+    // ä¸‹ä¸€é¡µ
     private int pageNo;
 
-    // µ±Ç°Ò³
+    // å½“å‰é¡µ
     private int currentPage;
 
-    // Ã¿Ò³¸ö¸öÊı
+    // æ¯é¡µä¸ªä¸ªæ•°
     private int pageSize;
 
-    // ×ÜÌõÊı
+    // æ€»æ¡æ•°
     private int totalCount;
 
-    // ×ÜÒ³Êı
+    // æ€»é¡µæ•°
     private int pageCount;
 
-    // ¼ÇÂ¼
+    // è®°å½•
     private List<T> results;
 
     public int getPageCount() {
