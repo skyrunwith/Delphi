@@ -13,11 +13,11 @@ public class StoragePO implements Serializable{
     private BigDecimal totalStorageTime;
     private BigDecimal totalSale;
     private BigDecimal totalSaleTime;
-    private BigDecimal totalPayout; //Ó¦¸¶¿î
-    private BigDecimal totalNotPayout; //Î´¸¶¿î
-    private BigDecimal totalReallyReceive; //Êµ¼ÊÊÕÈë
-    private BigDecimal totalReceive; //Ó¦ÊÕ¿î
-    private BigDecimal totalNotReceive; //Î´ÊÕ¿î
+    private BigDecimal totalPayout; //åº”ä»˜æ¬¾
+    private BigDecimal totalNotPayout; //æœªä»˜æ¬¾
+    private BigDecimal totalReallyReceive; //å®žé™…æ”¶å…¥
+    private BigDecimal totalReceive; //åº”æ”¶æ¬¾
+    private BigDecimal totalNotReceive; //æœªæ”¶æ¬¾
 
     public StoragePO() {
     }

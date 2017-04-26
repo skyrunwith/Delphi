@@ -1,10 +1,8 @@
 package com.fzd.web.controller;
 
-import com.fzd.dao.CustomerDao;
 import com.fzd.dao.EmployeeDao;
 import com.fzd.dao.PageResults;
 import com.fzd.dao.UserDao;
-import com.fzd.model.CustomerEntity;
 import com.fzd.model.EmployeeEntity;
 import com.fzd.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +29,13 @@ public class EmployeeController extends BaseController{
     @RequestMapping(value = {"/add"}, method = RequestMethod.POST)
     public Map<String, Object> addEmployee(EmployeeEntity employeeEntity){
         try {
-            employeeDao.saveOrUpdate(employeeEntity);
             UserEntity user = new UserEntity();
             user.setUsername(employeeEntity.getPhone());
             user.setPassword("123456");
-            user.setType(1);
-            userDao.save(user);
+            user.setType(3);
+//            employeeEntity.setUserEntity(user);
+            employeeDao.saveOrUpdate(employeeEntity);
+//            userDao.save(user);
             map = new HashMap<>();
             map.put("success", true);
         }catch (Exception e){

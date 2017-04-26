@@ -1,7 +1,5 @@
 package com.fzd.modelPo;
 
-import com.fzd.model.GoodsEntity;
-import com.fzd.model.ProducerEntity;
 import com.fzd.model.PurchasingEntity;
 
 /**

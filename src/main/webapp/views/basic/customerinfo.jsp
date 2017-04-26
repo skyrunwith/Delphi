@@ -1,6 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<div class="panel panel-info" style="margin: 10px">
+    <div class="panel-heading" style="min-height: 40px">
+        <div>
+            <h3 class="panel-title col-sm-2">客户列表</h3>
+        </div>
+    </div>
+    <div class="panel-body">
 <table class="table table-bordered" style="word-break:break-all; word-wrap:break-word;" id="customerTb">
     <thead>
     <tr>
@@ -25,7 +31,8 @@
         </nav>
     </div>
 </div>
-
+</div>
+    </div>
 <%--Goods Modal--%>
 <div class="modal fade" id="addCustomerModal" tabindex="-1" role="dialog" aria-labelledby="addGoodsModalLabel">
     <div class="modal-dialog" role="document">

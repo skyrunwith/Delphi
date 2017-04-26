@@ -47,8 +47,8 @@ public class HibernateImpl<T, ID extends Serializable> implements HibernateDao<T
      *
      */
     @Override
-    public void save(T t) {
-        this.getSession().save(t);
+    public Integer save(T t) {
+       return (Integer) this.getSession().save(t);
     }
 
     /**

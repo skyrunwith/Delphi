@@ -1,7 +1,5 @@
 package com.fzd.dao;
 
-import com.fzd.model.CategoryEntity;
-
 import java.io.Serializable;
 
 /**

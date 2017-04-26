@@ -34,11 +34,11 @@
             </li>
             <li class=""><a href="#goodsinfo" data-toggle="tab">商品信息管理</a>
             </li>
-            <li class=""><a href="#producerinfo" data-toggle="tab" onclick="onClickProducerNav()">供应商信息管理</a>
+            <li class="" id = "producerinfoTitle"><a href="#producerinfo" data-toggle="tab" onclick="onClickProducerNav()">供应商信息管理</a>
             </li>
-            <li class=""><a href="#clientinfo" data-toggle="tab" onclick="onClickCustomerNav()">客户信息管理</a>
+            <li class="" id = "clientinfoTitle"><a href="#clientinfo" data-toggle="tab" onclick="onClickCustomerNav()">客户信息管理</a>
             </li>
-            <li class=""><a href="#employee" data-toggle="tab" onclick="onClickEmployeeNav()">员工信息管理</a>
+            <li class="" id = "employeeTitle"><a href="#employee" data-toggle="tab" onclick="onClickEmployeeNav()">员工信息管理</a>
             </li>
         </ul>
 
@@ -75,7 +75,13 @@
         $('#addProducerModal').on('hide.bs.modal', function () {
             resetProducerForm();
         });
+
+        hideTitle();
     });
+
+    function hideTitle(){
+
+    }
 </script>
 
 </html>

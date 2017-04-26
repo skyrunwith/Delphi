@@ -33,15 +33,17 @@ function refreshStorageInfo(list){
         //设置每行供应商内容
         var tr = "<tr ><td>" + item.goodsEntity.name + "</td><td>" + item.goodsEntity.birthplace + "</td><td>" + item.goodsEntity.specification + "</td>"
             + "<td>" + item.goodsEntity.packaging + "</td><td>" +item.goodsEntity.comment+"</td><td>"+ sureNull(item.goodsEntity.storage) + "</td><td>" + sureNull(item.goodsEntity.totalStorage) + "</td>"
-            + "<td>" + sureNull(item.totalStorageTime) + "</td>"
+            //+ "<td>" + sureNull(item.totalStorageTime) + "</td>"
             + "<td>" + sureNull(item.totalSale) + "</td>"
-            + "<td>" + sureNull(item.totalSaleTime) + "</td>"
+            //+ "<td>" + sureNull(item.totalSaleTime) + "</td>"
             + "</tr>";
         tBody += tr;
 
     });
 
-    var thead = "<tr><td>名称</td><td>产地</td><td>规格</td><td>包装</td><td>备注</td><td>库存量</td><td >总进货量</td><td class='col-sm-1'>"+$("#beginTime").val().substr(0,10)+"  至"+ $("#endTime").val().substr(0,10)+"进货量</td><td>总销售量</td><td class='col-sm-1'>"+$("#beginTime").val().substr(0,10)+"  至"+ $("#endTime").val().substr(0,10)+"销售量</td> </tr>"
+    //var thead = "<tr><td>名称</td><td>产地</td><td>规格</td><td>包装</td><td>备注</td><td>库存量</td><td >总进货量</td><td class='col-sm-1'>"+$("#beginTime").val().substr(0,10)+"  至"+ $("#endTime").val().substr(0,10)+"进货量</td><td>总销售量</td><td class='col-sm-1'>"+$("#beginTime").val().substr(0,10)+"  至"+ $("#endTime").val().substr(0,10)+"销售量</td> </tr>"
+    var thead = "<tr><td>名称</td><td>产地</td><td>规格</td><td>包装</td><td>备注</td><td>库存量</td><td >总进货量</td>" +
+        "<td>总销售量</td></tr>"
     $("#storageInfoList thead").html(thead);
     $("#storageInfoList tbody").html(tBody);
 }

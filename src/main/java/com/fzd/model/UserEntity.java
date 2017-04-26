@@ -12,6 +12,7 @@ public class UserEntity {
     private String password;
     private int id;
     private int type;
+    private ProducerEntity producerEntity;
     @Basic
     @Column(name = "username")
     public String getUsername() {
@@ -70,5 +71,14 @@ public class UserEntity {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @OneToOne(mappedBy = "userEntity")
+    public ProducerEntity getProducerEntity() {
+        return producerEntity;
+    }
+
+    public void setProducerEntity(ProducerEntity producerEntity) {
+        this.producerEntity = producerEntity;
     }
 }

@@ -1,7 +1,5 @@
 package com.fzd.dao;
 
-import org.springframework.jdbc.core.RowMapper;
-
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
@@ -15,7 +13,7 @@ public interface HibernateDao <T, ID extends Serializable>{
      * <完整保存实体>
      * @param t 实体参数
      */
-    public abstract void save(T t);
+    public abstract Integer save(T t);
 
     /**
      * <保存或者更新实体>

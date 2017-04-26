@@ -22,6 +22,7 @@ public class ProducerEntity {
     private String acctNo;
     private String comment;
     private Collection<PurchasingEntity> purchasingsById;
+    private UserEntity userEntity;
 
     @Id
     @Column(name = "id")
@@ -191,5 +192,15 @@ public class ProducerEntity {
 
     public void setPurchasingsById(Collection<PurchasingEntity> purchasingsById) {
         this.purchasingsById = purchasingsById;
+    }
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    public UserEntity getUserEntity() {
+        return userEntity;
+    }
+
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 }

@@ -27,11 +27,13 @@
                 <li class="active"  id="purchaseManage" onclick="onTitleClick('purchaseManage')"><a href="<c:url value='/basic/purchase'/> ">采购管理</a></li>
                 <li id="sellManage" onclick="onTitleClick('sellManage')"><a href="<c:url value='/basic/sell'/> ">销售管理</a></li>
                 <li id="storageManage" onclick="onTitleClick('storageManage')"><a href="<c:url value='/basic/storage'/> ">库存管理</a></li>
+                <li id="statistical" onclick="onTitleClick('statistical')"><a href="<c:url value='/basic/storage'/> ">统计管理</a></li>
+                <li id="financial" onclick="onTitleClick('financial')"><a href="<c:url value='/basic/storage'/> ">财务管理</a></li>
             </ul>
         </div>
     </nav>
 </div>
-<div class="panel panel-info" style="margin: 5px">
+<div class="panel panel-info" style="margin: 10px">
     <div class="panel-heading" style="min-height: 40px">
         <div>
         <h3 class="panel-title col-sm-2">商品采购</h3>
@@ -128,7 +130,15 @@
             </div>
         </form>
     </div>
-    <div class="panel-footer">
+</div>
+
+<div class="panel panel-info" style="margin: 10px">
+    <div class="panel-heading" style="min-height: 40px">
+        <div>
+            <h3 class="panel-title col-sm-2">采购清单</h3>
+        </div>
+    </div>
+    <div class="panel-body">
         <table class="table table-bordered" id="purchaseTb" style="word-break:break-all; word-wrap:break-word;">
             <thead>
             <tr>
@@ -163,7 +173,6 @@
         </nav>
     </div>
 </div>
-
 <%--Purchase add modal--%>
 <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="add">
     <div class="modal-dialog" role="document">
@@ -275,6 +284,7 @@
 <script type="text/javascript" src="<c:url value='/static/custom/purchasing.js'/>"></script>
 <script type="text/javascript" language="JavaScript">
     $(document).ready(function () {
+        showTitle();
         $('#putInTime').datetimepicker({
             format: "yyyy/mm/dd hh:ii:ss",
             language: 'zh-CN',

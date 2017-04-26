@@ -1,8 +1,6 @@
 package com.fzd.dao.impl;
 
-import com.fzd.dao.CategoryDao;
 import com.fzd.dao.EmployeeDao;
-import com.fzd.model.CategoryEntity;
 import com.fzd.model.EmployeeEntity;
 import org.springframework.stereotype.Repository;
 

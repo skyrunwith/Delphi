@@ -1,10 +1,7 @@
 package com.fzd.dao.impl;
 
-import com.fzd.dao.SellDao;
 import com.fzd.dao.UserDao;
-import com.fzd.model.SellEntity;
 import com.fzd.model.UserEntity;
-import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 

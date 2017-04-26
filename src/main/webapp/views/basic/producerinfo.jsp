@@ -1,38 +1,56 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<div class="panel panel-info" style="margin: 10px">
+    <div class="panel-heading" style="min-height: 40px">
+        <div>
+            <h3 class="panel-title col-sm-2">厂商清单</h3>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered" id="producerTb" style="word-break:break-all; word-wrap:break-word;">
+            <thead>
+            <tr>
+                <td>公司</td>
+                <td>公司电话</td>
+                <td>传真</td>
+                <td>联系人</td>
+                <td>联系人电话</td>
+                <td>地址</td>
+                <td>邮编</td>
+                <td>电子邮件</td>
+                <td>开户银行</td>
+                <td>银行卡号</td>
+                <td>备注</td>
+                <td style="width:5%;text-align: center"><input type="checkbox" id="producerCheckAll"
+                                                               onclick="producerCheckAll(this)"/></td>
+                <td style="width:5%;text-align: center">操作</td>
+            </tr>
+            </thead>
+            <tbody>
 
-<table class="table table-bordered" id="producerTb" style="word-break:break-all; word-wrap:break-word;">
-    <thead>
-    <tr>
-        <td>公司</td><td>公司电话</td><td>传真</td><td>联系人</td><td>联系人电话</td><td>地址</td><td>邮编</td><td>电子邮件</td><td>开户银行</td><td>银行卡号</td>
-        <td >备注</td>
-        <td style="width:5%;text-align: center"><input type="checkbox" id="producerCheckAll" onclick="producerCheckAll(this)" /></td>
-        <td style="width:5%;text-align: center">操作</td>
-    </tr>
-    </thead>
-    <tbody>
-
-    </tbody>
-</table>
-<div>
-    <div>
-        <nav aria-label="Page navigation col-sm-11" style="text-align: center" >
-            <ul class="pagination">
-                <li><a href="#">上一页</a></li>
-                <li><a href="#">下一页</a></li>
-                <li><a href="#" data-toggle="modal" data-target="#addProducerModal">新增</a></li>
-                <li><a href="#" onclick="delProducer()">删除</a></li>
-            </ul>
-        </nav>
+            </tbody>
+        </table>
+        <div>
+            <div>
+                <nav aria-label="Page navigation col-sm-11" style="text-align: center">
+                    <ul class="pagination">
+                        <li><a href="#">上一页</a></li>
+                        <li><a href="#">下一页</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#addProducerModal">新增</a></li>
+                        <li><a href="#" onclick="delProducer()">删除</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
     </div>
 </div>
-
 <%--Goods Modal--%>
 <div class="modal fade" id="addProducerModal" tabindex="-1" role="dialog" aria-labelledby="addGoodsModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
                 <h5 class="modal-title" id="addGoodsModalLabel">新增分类信息</h5>
             </div>
             <div class="modal-body">

@@ -17,7 +17,7 @@ public class CategoryEntity implements Serializable{
     private String name;
     private String comment;
     private Collection<GoodsEntity> goodsesById;
-
+    private ProducerEntity producer;
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -49,6 +49,8 @@ public class CategoryEntity implements Serializable{
         this.comment = comment;
     }
 
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -79,5 +81,15 @@ public class CategoryEntity implements Serializable{
 
     public void setGoodsesById(Collection<GoodsEntity> goodsesById) {
         this.goodsesById = goodsesById;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "producer_id", referencedColumnName = "id")
+    public ProducerEntity getProducer() {
+        return producer;
+    }
+
+    public void setProducer(ProducerEntity producer) {
+        this.producer = producer;
     }
 }

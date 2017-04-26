@@ -20,6 +20,7 @@ public class CustomerEntity {
     private String contactPhone;
     private String comment;
     private Collection<SellEntity> sellsById;
+    private UserEntity userEntity;
 
     @Id
     @Column(name = "id")
@@ -164,5 +165,15 @@ public class CustomerEntity {
 
     public void setSellsById(Collection<SellEntity> sellsById) {
         this.sellsById = sellsById;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    public UserEntity getUserEntity() {
+        return userEntity;
+    }
+
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 }

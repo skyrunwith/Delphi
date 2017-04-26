@@ -12,14 +12,21 @@
 <script type="text/javascript" language="JavaScript">
     function showTitle(){
         var type = ${sessionScope.user.type};
-        if(type == 1){
+        if(type == 1){ //供应商
             $("#purchaseManage").hide();
             $("#sellManage").hide();
             $("#storageManage").hide();
-        }else if(type == 2){
+            $("#producerinfoTitle").hide();
+            $("#clientinfoTitle").hide();
+            $("#employeeTitle").hide();
+        }else if(type == 2){   //客户
                 $("#basicManage").hide();
                 $("#sellManage").hide();
                 $("#storageManage").hide();
+        }else if(type == 3){  //员工
+            $("#basicManage").hide();
+            $("#sellManage").hide();
+            $("#storageManage").hide();
         }
     }
 </script>

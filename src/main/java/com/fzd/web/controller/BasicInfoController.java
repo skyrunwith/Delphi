@@ -1,8 +1,11 @@
 package com.fzd.web.controller;
 
+import com.fzd.model.UserEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by FZD on 2017/3/15.
@@ -11,8 +14,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = {"/basic"})
 public class BasicInfoController extends BaseController{
 
+    @RequestMapping(value = {"/"}, method = RequestMethod.GET)
+    public String index(HttpSession session){
+         UserEntity userEntity = (UserEntity) session.getAttribute("user");
+        if(userEntity.getType() == 2){
+            return "purchase/purchasing";
+        }else if(userEntity.getType() == 3){
+            return "purchase/sell";
+        }
+        return "basic/basicinfo";
+    }
+
     @RequestMapping(value = {"/info"}, method = RequestMethod.GET)
-    public String index(){
+    public String info(){
         return "basic/basicinfo";
     }
 

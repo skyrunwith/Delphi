@@ -3,7 +3,6 @@ package com.fzd.web.controller;
 import com.fzd.dao.PageResults;
 import com.fzd.dao.ProducerDao;
 import com.fzd.dao.UserDao;
-import com.fzd.model.CategoryEntity;
 import com.fzd.model.ProducerEntity;
 import com.fzd.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +30,14 @@ public class ProducerController extends BaseController{
     @RequestMapping(value = {"/add"}, method = RequestMethod.POST)
     public Map<String, Object> addProducer(ProducerEntity producerEntity){
         try {
-            producerDao.saveOrUpdate(producerEntity);
             UserEntity user = new UserEntity();
             user.setUsername(producerEntity.getEmail());
             user.setPassword("123456");
-            user.setType(1);
-            userDao.save(user);
+            user.setType(2);
+            int id = userDao.save(user);
+            user = (UserEntity) userDao.load(id);
+            producerEntity.setUserEntity(user);
+            producerDao.saveOrUpdate(producerEntity);
             map = new HashMap<>();
             map.put("success", true);
         }catch (Exception e){

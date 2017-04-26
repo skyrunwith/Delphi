@@ -17,9 +17,10 @@ public class EmployeeEntity {
     private String college;
     private String position;
     private String career;
-
+    private UserEntity userEntity;
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId() {
         return id;
     }
@@ -140,5 +141,15 @@ public class EmployeeEntity {
         result = 31 * result + (position != null ? position.hashCode() : 0);
         result = 31 * result + (career != null ? career.hashCode() : 0);
         return result;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    public UserEntity getUserEntity() {
+        return userEntity;
+    }
+
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 }
