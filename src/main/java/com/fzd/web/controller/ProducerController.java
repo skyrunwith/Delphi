@@ -5,6 +5,8 @@ import com.fzd.dao.ProducerDao;
 import com.fzd.dao.UserDao;
 import com.fzd.model.ProducerEntity;
 import com.fzd.model.UserEntity;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +28,9 @@ public class ProducerController extends BaseController{
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private SessionFactory sessionFactory;
     @ResponseBody
     @RequestMapping(value = {"/add"}, method = RequestMethod.POST)
     public Map<String, Object> addProducer(ProducerEntity producerEntity){
@@ -34,10 +39,14 @@ public class ProducerController extends BaseController{
             user.setUsername(producerEntity.getEmail());
             user.setPassword("123456");
             user.setType(2);
-            int id = userDao.save(user);
-            user = (UserEntity) userDao.load(id);
+            Session session = sessionFactory.getCurrentSession();
+            session.beginTransaction();
             producerEntity.setUserEntity(user);
-            producerDao.saveOrUpdate(producerEntity);
+            session.save(producerEntity);
+            session.getTransaction().commit();
+//            int id = userDao.save(user);
+//            UserEntity user2 = (UserEntity) userDao.load(id);
+//            producerDao.save(producerEntity);
             map = new HashMap<>();
             map.put("success", true);
         }catch (Exception e){

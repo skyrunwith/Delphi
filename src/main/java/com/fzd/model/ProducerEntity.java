@@ -22,6 +22,7 @@ public class ProducerEntity {
     private String acctNo;
     private String comment;
     private Collection<PurchasingEntity> purchasingsById;
+
     private UserEntity userEntity;
 
     @Id
@@ -195,7 +196,7 @@ public class ProducerEntity {
     }
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", unique = true)
     public UserEntity getUserEntity() {
         return userEntity;
     }
