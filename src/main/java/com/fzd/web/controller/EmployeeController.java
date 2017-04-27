@@ -33,9 +33,8 @@ public class EmployeeController extends BaseController{
             user.setUsername(employeeEntity.getPhone());
             user.setPassword("123456");
             user.setType(3);
-//            employeeEntity.setUserEntity(user);
+            employeeEntity.setUserEntity(user);
             employeeDao.saveOrUpdate(employeeEntity);
-//            userDao.save(user);
             map = new HashMap<>();
             map.put("success", true);
         }catch (Exception e){
@@ -81,7 +80,11 @@ public class EmployeeController extends BaseController{
     @RequestMapping(value = {"/update"}, method = RequestMethod.POST)
     public Map<String, Object> updateEmployee(EmployeeEntity employeeEntity ){
         try{
-            employeeDao.saveOrUpdate(employeeEntity);
+            EmployeeEntity oldEmploee = (EmployeeEntity) employeeDao.load(employeeEntity.getId());
+            UserEntity userEntity = oldEmploee.getUserEntity();
+            userEntity.setUsername(employeeEntity.getPhone());
+            employeeEntity.setUserEntity(userEntity);
+            employeeDao.merge(employeeEntity);
             map = new HashMap<>();
             map.put("success", true);
         }catch (Exception e){

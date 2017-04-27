@@ -39,14 +39,8 @@ public class ProducerController extends BaseController{
             user.setUsername(producerEntity.getEmail());
             user.setPassword("123456");
             user.setType(2);
-            Session session = sessionFactory.getCurrentSession();
-            session.beginTransaction();
             producerEntity.setUserEntity(user);
-            session.save(producerEntity);
-            session.getTransaction().commit();
-//            int id = userDao.save(user);
-//            UserEntity user2 = (UserEntity) userDao.load(id);
-//            producerDao.save(producerEntity);
+            producerDao.saveOrUpdate(producerEntity);
             map = new HashMap<>();
             map.put("success", true);
         }catch (Exception e){
@@ -87,9 +81,13 @@ public class ProducerController extends BaseController{
 
     @ResponseBody
     @RequestMapping(value = {"/update"}, method = RequestMethod.POST)
-    public Map<String, Object> updateProducer(ProducerEntity producerEntity ){
+    public Map<String, Object> updateProducer(ProducerEntity producerEntity){
         try{
-            producerDao.saveOrUpdate(producerEntity);
+            ProducerEntity oldProducer = (ProducerEntity) producerDao.load(producerEntity.getId());
+            UserEntity userEntity = oldProducer.getUserEntity();
+            userEntity.setUsername(producerEntity.getEmail());
+            producerEntity.setUserEntity(userEntity);
+            producerDao.merge(producerEntity);
             map = new HashMap<>();
             map.put("success", true);
         }catch (Exception e){

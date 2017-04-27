@@ -167,8 +167,8 @@ public class CustomerEntity {
         this.sellsById = sellsById;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", unique = true)
     public UserEntity getUserEntity() {
         return userEntity;
     }

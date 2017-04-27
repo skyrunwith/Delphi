@@ -33,7 +33,7 @@ public class CustomerController extends BaseController{
             user.setUsername(customerEntity.getEmail());
             user.setPassword("123456");
             user.setType(1);
-//            customerEntity.setUserEntity(user);
+            customerEntity.setUserEntity(user);
             customerDao.saveOrUpdate(customerEntity);
             map = new HashMap<>();
             map.put("success", true);
@@ -77,7 +77,11 @@ public class CustomerController extends BaseController{
     @RequestMapping(value = {"/update"}, method = RequestMethod.POST)
     public Map<String, Object> updateCustomer(CustomerEntity customerEntity ){
         try{
-            customerDao.saveOrUpdate(customerEntity);
+            CustomerEntity oldCustomer = (CustomerEntity) customerDao.load(customerEntity.getId());
+            UserEntity userEntity = oldCustomer.getUserEntity();
+            userEntity.setUsername(customerEntity.getEmail());
+            customerEntity.setUserEntity(userEntity);
+            customerDao.merge(customerEntity);
             map = new HashMap<>();
             map.put("success", true);
         }catch (Exception e){
