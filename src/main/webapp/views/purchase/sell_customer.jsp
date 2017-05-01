@@ -26,7 +26,7 @@
                 <li id="basicManage" onclick="onTitleClick('basicManage')"><a
                         href="<c:url value='/basic/info'/> ">基础信息</a></li>
                 <li id="purchaseManage" onclick="onTitleClick('purchaseManage')"><a
-                        href="<c:url value='/basic/purchase'/> ">采购管理</a></li>
+                        href="<c:url value='/basic/sell/sell_customer'/> ">采购管理</a></li>
                 <li class="active" id="sellManage" onclick="onTitleClick('sellManage')"><a
                         href="<c:url value='/basic/sell'/> ">销售管理</a></li>
                 <li id="storageManage" onclick="onTitleClick('storageManage')"><a
@@ -38,106 +38,106 @@
         </div>
     </nav>
 </div>
-<div class="panel panel-info" style="margin: 10px">
-    <div class="panel-heading" style="min-height: 40px">
-        <div>
-            <h3 class="panel-title col-sm-2">商品销售</h3>
-            <div class="col-sm-10">
-                <a href="#" style="float: right;margin: 5px" data-toggle="modal" data-target="#add"
-                   onclick="upOption('INSERT')">新增</a>
-                <a href="#" style="float: right;margin: 5px" onclick="addOrUpdateSell()">保存</a>
-                <a href="#" style="float: right;margin: 5px" onclick="upOption('DELETE')">删除</a>
-                <a href="#" style="float: right;margin: 5px" data-toggle="modal" data-target="#query">查询</a>
-            </div>
-        </div>
-    </div>
-    <div class="panel-body">
-        <form>
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <input type="text" hidden="hidden" id="sellId">
-                    <input type="text" hidden="hidden" id="goodsId">
-                    <label for="goodsName" class="control-label">商品名称</label>
-                    <input type="text" class="form-control" id="goodsName" disabled>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <label for="customerName" class="control-label">客户</label>
-                    <select type="text" class="form-control" id="customerName"></select>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <label for="sellTime" class="control-label">销售时间</label>
+<%--<div class="panel panel-info" style="margin: 10px">--%>
+    <%--<div class="panel-heading" style="min-height: 40px">--%>
+        <%--<div>--%>
+            <%--<h3 class="panel-title col-sm-2">商品销售</h3>--%>
+            <%--<div class="col-sm-10">--%>
+                <%--<a href="#" style="float: right;margin: 5px" data-toggle="modal" data-target="#add"--%>
+                   <%--onclick="upOption('INSERT')">新增</a>--%>
+                <%--<a href="#" style="float: right;margin: 5px" onclick="addOrUpdateSell()">保存</a>--%>
+                <%--<a href="#" style="float: right;margin: 5px" onclick="upOption('DELETE')">删除</a>--%>
+                <%--<a href="#" style="float: right;margin: 5px" data-toggle="modal" data-target="#query">查询</a>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+    <%--<div class="panel-body">--%>
+        <%--<form>--%>
+            <%--<div class="col-sm-4">--%>
+                <%--<div class="form-group">--%>
+                    <%--<input type="text" hidden="hidden" id="sellId">--%>
+                    <%--<input type="text" hidden="hidden" id="goodsId">--%>
+                    <%--<label for="goodsName" class="control-label">商品名称</label>--%>
+                    <%--<input type="text" class="form-control" id="goodsName" disabled>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<div class="col-sm-4">--%>
+                <%--<div class="form-group">--%>
+                    <%--<label for="customerName" class="control-label">客户</label>--%>
+                    <%--<select type="text" class="form-control" id="customerName"></select>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<div class="col-sm-4">--%>
+                <%--<div class="form-group">--%>
+                    <%--<label for="sellTime" class="control-label">销售时间</label>--%>
 
-                    <div class='input-group date'>
-                        <input type='text' class="form-control" id='sellTime' readonly/>
+                    <%--<div class='input-group date'>--%>
+                        <%--<input type='text' class="form-control" id='sellTime' readonly/>--%>
 
-                        <div class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-group">
-                    <label for="unitPrice" class="control-label">单价</label>
-                    <input type="number" class="form-control" id="unitPrice" onchange="countTotalPrice()" min="0" readonly>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-group">
-                    <label for="totalNumber" class="control-label">销售数量</label>
-                    <input type="number" class="form-control" id="totalNumber" onchange="countTotalPrice()" min="0">
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-group">
-                    <label for="totalPrice" class="control-label">总价</label>
-                    <input type="number" disabled class="form-control" id="totalPrice">
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="form-group">
-                    <label for="paid" class="control-label">已支付</label>
-                    <input type="number" class="form-control" id="paid" min="0" onchange="countDebt()">
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="form-group">
-                    <label for="debt" class="control-label">欠款</label>
-                    <input type="text" disabled class="form-control" id="debt">
-                </div>
-            </div>
-            <div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <label for="storage" class="control-label">库存量</label>
-                        <input type="number" disabled class="form-control" id="storage">
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <label for="sales" class="control-label">销售量</label>
-                        <input type="number" disabled class="form-control" id="sales">
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group" style="visibility: hidden">
-                        <label for="zhanwei" class="control-label">销售量</label>
-                        <input type="text" class="form-control" id="zhanwei">
-                    </div>
-                </div>
-            </div>
+                        <%--<div class="input-group-addon">--%>
+                            <%--<span class="glyphicon glyphicon-calendar"></span>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<div class="col-sm-2">--%>
+                <%--<div class="form-group">--%>
+                    <%--<label for="unitPrice" class="control-label">单价</label>--%>
+                    <%--<input type="number" class="form-control" id="unitPrice" onchange="countTotalPrice()" min="0" readonly>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<div class="col-sm-2">--%>
+                <%--<div class="form-group">--%>
+                    <%--<label for="totalNumber" class="control-label">销售数量</label>--%>
+                    <%--<input type="number" class="form-control" id="totalNumber" onchange="countTotalPrice()" min="0">--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<div class="col-sm-2">--%>
+                <%--<div class="form-group">--%>
+                    <%--<label for="totalPrice" class="control-label">总价</label>--%>
+                    <%--<input type="number" disabled class="form-control" id="totalPrice">--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<div class="col-sm-3">--%>
+                <%--<div class="form-group">--%>
+                    <%--<label for="paid" class="control-label">已支付</label>--%>
+                    <%--<input type="number" class="form-control" id="paid" min="0" onchange="countDebt()">--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<div class="col-sm-3">--%>
+                <%--<div class="form-group">--%>
+                    <%--<label for="debt" class="control-label">欠款</label>--%>
+                    <%--<input type="text" disabled class="form-control" id="debt">--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<div>--%>
+                <%--<div class="col-sm-3">--%>
+                    <%--<div class="form-group">--%>
+                        <%--<label for="storage" class="control-label">库存量</label>--%>
+                        <%--<input type="number" disabled class="form-control" id="storage">--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="col-sm-3">--%>
+                    <%--<div class="form-group">--%>
+                        <%--<label for="sales" class="control-label">销售量</label>--%>
+                        <%--<input type="number" disabled class="form-control" id="sales">--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="col-sm-6">--%>
+                    <%--<div class="form-group" style="visibility: hidden">--%>
+                        <%--<label for="zhanwei" class="control-label">销售量</label>--%>
+                        <%--<input type="text" class="form-control" id="zhanwei">--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+            <%--</div>--%>
 
-            <div class="form-group">
-                <label for="comment" class="control-label">备注</label>
-                <textarea class="form-control" id="comment"></textarea>
-            </div>
-        </form>
-    </div>
-</div>
+            <%--<div class="form-group">--%>
+                <%--<label for="comment" class="control-label">备注</label>--%>
+                <%--<textarea class="form-control" id="comment"></textarea>--%>
+            <%--</div>--%>
+        <%--</form>--%>
+    <%--</div>--%>
+<%--</div>--%>
 
 <div class="panel panel-info" style="margin: 10px">
     <div class="panel-heading" style="min-height: 40px">
@@ -160,9 +160,9 @@
                 <td>库存量</td>
                 <td>销售量</td>
                 <td>备注</td>
-                <td style="width:5%;text-align: center"><input type="checkbox" id="sellCheckAllUn"
-                                                               onclick="sellCheckAll(this)"/></td>
-                <td>操作</td>
+                <%--<td style="width:5%;text-align: center"><input type="checkbox" id="sellCheckAllUn"--%>
+                                                               <%--onclick="sellCheckAll(this)"/></td>--%>
+                <%--<td>操作</td>--%>
             </tr>
             </thead>
             <tbody>
@@ -368,19 +368,19 @@
 <script type="text/javascript" src="<c:url value='/static/custom/goods2.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/static/custom/category1.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/static/custom/customer.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/static/custom/sell.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/static/custom/sell_customer.js'/>"></script>
 <script type="text/javascript" language="JavaScript">
     $(document).ready(function () {
         showTitle();
-        $('#sellTime').datetimepicker({
-            format: "yyyy/mm/dd hh:ii:ss",
-            language: 'zh-CN',
-            autoclose: true,
-            todayBtn: true,
-            pickerPosition: "bottom-left"
-        });
-        getAllCategories();
-        initCustomerSelect();
+//        $('#sellTime').datetimepicker({
+//            format: "yyyy/mm/dd hh:ii:ss",
+//            language: 'zh-CN',
+//            autoclose: true,
+//            todayBtn: true,
+//            pickerPosition: "bottom-left"
+//        });
+//        getAllCategories();
+//        initCustomerSelect();
         getSellByParams();
         getSellByParamsUn();
     });

@@ -3,13 +3,10 @@
  */
 var pageIndex = 1
 var purchaseArr;
-var pageCount = -1;
 var option;
 var producerPageIndex = 1;
-
 var pageIndexUn = 1;
 var purchaseArrUn;
-var pageCountUn = -1;
 
 //新增或修改采购单
 function addOrUpdatePurchase(){
@@ -35,7 +32,7 @@ function addOrUpdatePurchase(){
         success:function(data){
             if(data.success){
                 resetPurchaseForm();
-                getPurchaseByParamsUn();
+                getPurchaseByParams();
             }
         }
     });
@@ -62,7 +59,7 @@ function delPurchase() {
         traditional: true,
         success: function (data) {
             if (data.success) {
-                getPurchaseByParamsUn();
+                getPurchaseByParams();
             }
         }
     });
@@ -82,7 +79,6 @@ function confirmComplete(){
         success: function (data) {
             if (data.success) {
                 getPurchaseByParams();
-                getPurchaseByParamsUn();
             }
         }
     });
@@ -90,7 +86,6 @@ function confirmComplete(){
 function update(oj) {
     var index = oj.getAttribute("data-index");
     var item = purchaseArr[index];
-    initProducerSelect(item.goodsEntity.id);
     $("#unitPrice").val(item.purchase.unitPrice);
     $("#totalNumber").val(item.purchase.totalNumber);
     $("#totalPrice").val(item.purchase.totalPrice);
@@ -107,14 +102,13 @@ function update(oj) {
     upOption("UPDATE")
 
 }
-//获取已完成采购订单
 function getPurchaseByParams(){
     var goodsName = $("#queryGoodsName").val();
     var producerName = $("#queryProducerName").val();
     $.post({
         url: path + "/purchase/getByParams",
         dataType: "json",
-        data:{"goodsName":goodsName, "producerName":producerName, "pageIndex":pageIndex, state: 1},
+        data:{"goodsName":goodsName, "producerName":producerName, "pageIndex":pageIndex},
         success:function(data){
             if(data.success){
                 $("#query").modal("hide");
@@ -128,32 +122,24 @@ function getPurchaseByParams(){
     });
 }
 
-//获取未完成采购订单
-function getPurchaseByParamsUn(){
-    var goodsName = $("#queryGoodsName").val();
-    var producerName = $("#queryProducerName").val();
-    $.post({
-        url: path + "/purchase/getByParams",
-        dataType: "json",
-        data:{"goodsName":goodsName, "producerName":producerName, "pageIndex":pageIndexUn, state: 0},
-        success:function(data){
-            if(data.success){
-                $("#query").modal("hide");
-                refreshPurchasesUn(data.list);
-                resetPurchaseForm();
-                if(pageCount < 0){
-                    pageCount = data.pageCount;
-                }
-            }
-        }
-    });
-}
-//查询后刷新已完成采购列表
+//查询后刷新采购列表
 function refreshPurchases(list) {
     purchaseArr = list;
+    var tBodyUn = '';
     var tBody = '';
     $(list).each(function (i, item) {
         //设置每行供应商内容
+        if (item.purchase.state == 0) {
+            var tr = "<tr><td>" + item.goodsEntity.name + "</td><td>" + item.producerEntity.companyName + "</td><td>" + formateTimestap(item.purchase.putInTime) + "</td>"
+                + "<td>" + item.purchase.unitPrice + "</td><td>" + item.purchase.totalNumber + "</td><td>" + item.purchase.totalPrice + "</td><td>" + item.purchase.payout + "</td>"
+                + "<td>" + (item.purchase.totalPrice - item.purchase.payout) + "</td><td>" + item.goodsEntity.storage + "</td><td>" + sureNull(item.goodsEntity.sales) + "</td>"
+                + "<td>" + item.purchase.comment + "</td>" +
+                //"<td style='max-width: 20px;text-align: center'>"
+                //+ "<input type='checkbox' name='purchaseCheck' onclick='purchaseCheck(this)' data-id='" + item.purchase.id + "'  /></td>"
+                //+ "<td style='max-width: 20px;text-align: center'><p><span class='label label-info' onclick='update(this)' data-index='" + i + "'>修改</span></p></td>"
+                + "</tr>";
+            tBodyUn += tr;
+        }else if(item.purchase.state == 1){
             var tr = "<tr><td>" + item.goodsEntity.name + "</td><td>" + item.producerEntity.companyName + "</td><td>" + formateTimestap(item.purchase.putInTime) + "</td>"
                 + "<td>" + item.purchase.unitPrice + "</td><td>" + item.purchase.totalNumber + "</td><td>" + item.purchase.totalPrice + "</td><td>" + item.purchase.payout + "</td>"
                 + "<td>" + (item.purchase.totalPrice - item.purchase.payout) + "</td><td>" + item.goodsEntity.storage + "</td><td>" + sureNull(item.goodsEntity.sales) + "</td>"
@@ -163,29 +149,10 @@ function refreshPurchases(list) {
                 + "<td style='max-width: 20px;text-align: center'></td>"
                 + "</tr>";
             tBody += tr;
-    });
-    $("#purchaseTb tbody").html(tBody);
-}
-
-//查询后刷新未完成采购列表
-function refreshPurchasesUn(list) {
-    purchaseArrUn = list;
-    var tBodyUn = '';
-    $(list).each(function (i, item) {
-        //设置每行供应商内容
-        if (item.purchase.state == 0) {
-            var tr = "<tr><td>" + item.goodsEntity.name + "</td><td>" + item.producerEntity.companyName + "</td><td>" + formateTimestap(item.purchase.putInTime) + "</td>"
-                + "<td>" + item.purchase.unitPrice + "</td><td>" + item.purchase.totalNumber + "</td><td>" + item.purchase.totalPrice + "</td><td>" + item.purchase.payout + "</td>"
-                + "<td>" + (item.purchase.totalPrice - item.purchase.payout) + "</td><td>" + sureNull(item.goodsEntity.storage) + "</td><td>" + sureNull(item.goodsEntity.sales) + "</td>"
-                + "<td>" + item.purchase.comment + "</td>" +
-                "<td style='max-width: 20px;text-align: center'>"
-                + "<input type='checkbox' name='purchaseCheck' onclick='purchaseCheck(this)' data-id='" + item.purchase.id + "'  /></td>"
-                + "<td style='max-width: 20px;text-align: center'><p><span class='label label-info' onclick='update(this)' data-index='" + i + "'>修改</span></p></td>"
-                + "</tr>";
-            tBodyUn += tr;
         }
     });
     $("#purchaseTbUn tbody").html(tBodyUn);
+    $("#purchaseTb tbody").html(tBody);
 }
 
 function purchaseCheckAll(oj){
@@ -198,27 +165,27 @@ function purchaseCheck(oj){
 }
 
 
-//初始化供应商下拉框
-//参数：商品id
-function initProducerSelect(id){
-    $.post({
-        url:path+"/producer/getAll",
-        data: {pageIndex: producerPageIndex,id:id},
-        dataType: "json",
-        success: function (data) {
-            if(data.success) {
-                var producer =data.list.results;
-                var select = '';
-                $(producer).each(function(i,item){
-                    var option = "<option value='"+item.id+"'>"+item.companyName+"</option>";
-                    select+=option;
-                });
-                $("#producerName").html("<option data-index=''></option>");
-                $("#producerName").html(select);
-            }
-        }
-    });
-}
+////初始化供应商下拉框
+////参数：商品id
+//function initProducerSelect(id){
+//    $.post({
+//        url:path+"/producer/getAll",
+//        data: {pageIndex: producerPageIndex,id:id},
+//        dataType: "json",
+//        success: function (data) {
+//            if(data.success) {
+//                var producer =data.list.results;
+//                var select = '';
+//                $(producer).each(function(i,item){
+//                    var option = "<option value='"+item.id+"'>"+item.companyName+"</option>";
+//                    select+=option;
+//                });
+//                $("#producerName").html("<option data-index=''></option>");
+//                $("#producerName").html(select);
+//            }
+//        }
+//    });
+//}
 
 //计算总价
 function countTotalPrice(){
@@ -273,27 +240,13 @@ function sureNull(str){
 function previous(){
     if(pageIndex > 1){
         pageIndex--;
-        getPurchaseByParams();
+        getStorage();
     }
 }
 
 function next(){
     if(pageIndex < pageCount) {
         pageIndex++;
-        getPurchaseByParams();
-    }
-}
-
-function previousUn(){
-    if(pageIndexUn > 1){
-        pageIndexUn--;
-        getPurchaseByParamsUn();
-    }
-}
-
-function nextUn(){
-    if(pageIndexUn < pageCountUn) {
-        pageIndexUn++;
-        getPurchaseByParamsUn();
+        getStorage();
     }
 }

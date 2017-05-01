@@ -7,10 +7,7 @@ import com.fzd.model.EmployeeEntity;
 import com.fzd.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +24,7 @@ public class EmployeeController extends BaseController{
     private UserDao userDao;
     @ResponseBody
     @RequestMapping(value = {"/add"}, method = RequestMethod.POST)
-    public Map<String, Object> addEmployee(EmployeeEntity employeeEntity){
+    public Map<String, Object> addEmployee(@RequestBody EmployeeEntity employeeEntity){
         try {
             UserEntity user = new UserEntity();
             user.setUsername(employeeEntity.getPhone());

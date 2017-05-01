@@ -1,8 +1,10 @@
 package com.fzd.web.controller;
 
+import com.fzd.dao.CategoryDao;
 import com.fzd.dao.CustomerDao;
 import com.fzd.dao.PageResults;
 import com.fzd.dao.UserDao;
+import com.fzd.model.CategoryEntity;
 import com.fzd.model.CustomerEntity;
 import com.fzd.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,8 @@ public class CustomerController extends BaseController{
     private CustomerDao customerDao;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private CategoryDao categoryDao;
     @ResponseBody
     @RequestMapping(value = {"/add"}, method = RequestMethod.POST)
     public Map<String, Object> addCustomer(CustomerEntity customerEntity){
@@ -32,7 +36,7 @@ public class CustomerController extends BaseController{
             UserEntity user = new UserEntity();
             user.setUsername(customerEntity.getEmail());
             user.setPassword("123456");
-            user.setType(1);
+            user.setType(2);
             customerEntity.setUserEntity(user);
             customerDao.saveOrUpdate(customerEntity);
             map = new HashMap<>();
@@ -58,12 +62,23 @@ public class CustomerController extends BaseController{
         return map;
     }
 
+    /**
+     * 通过商品id查询客户
+     * @param pageIndex
+     * @param id
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = {"/getAll"}, method = RequestMethod.POST)
     public Map<String, Object> getCustomers(@RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex){
         try{
             PageResults<CustomerEntity> list;
-            list = (PageResults<CustomerEntity>) customerDao.findPageByFetchedHql("from CustomerEntity cus", null, pageIndex, pageSize);
+//            if(id > 0){
+//                CategoryEntity categoryEntity = (com.fzd.model.CategoryEntity) categoryDao.load(id);
+//                list = (PageResults<CustomerEntity>) customerDao51.findPageByFetchedHql("from CustomerEntity cus", null, pageIndex, pageSize, categoryEntity.get);
+//            }else{
+                list = (PageResults<CustomerEntity>) customerDao.findPageByFetchedHql("from CustomerEntity cus", null, pageIndex, pageSize);
+//            }
             map = new HashMap<>();
             map.put("list",list);
             map.put("success", true);

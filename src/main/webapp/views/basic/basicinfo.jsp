@@ -21,8 +21,8 @@
                 <li id="purchaseManage" onclick="onTitleClick('purchaseManage')"><a href="<c:url value='/basic/purchase'/> ">采购管理</a></li>
                 <li id="sellManage" onclick="onTitleClick('sellManage')"><a href="<c:url value='/basic/sell'/> ">销售管理</a></li>
                 <li id="storageManage" onclick="onTitleClick('storageManage')"><a href="<c:url value='/basic/storage'/> ">库存管理</a></li>
-                <li id="statistical" onclick="onTitleClick('statistical')"><a href="<c:url value='/basic/storage'/> ">统计管理</a></li>
-                <li id="financial" onclick="onTitleClick('financial')"><a href="<c:url value='/basic/storage'/> ">财务管理</a></li>
+                <li id="statistical" onclick="onTitleClick('statistical')"><a href="<c:url value='/basic/statistical'/> ">统计管理</a></li>
+                <li id="financial" onclick="onTitleClick('financial')"><a href="<c:url value='/basic/financial'/> ">财务管理</a></li>
             </ul>
         </div>
     </nav>
@@ -30,9 +30,9 @@
 <div class="panel panel-default" style="margin: 5px;">
     <div class="panel-body">
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#categoryinfo" data-toggle="tab">分类信息管理</a>
+            <li class="active"><a href="#categoryinfo" data-toggle="tab" id="categoryTab">分类信息管理</a>
             </li>
-            <li class=""><a href="#goodsinfo" data-toggle="tab">商品信息管理</a>
+            <li class=""><a href="#goodsinfo" data-toggle="tab" id="goodsTab">商品信息管理</a>
             </li>
             <li class="" id = "producerinfoTitle"><a href="#producerinfo" data-toggle="tab" onclick="onClickProducerNav()">供应商信息管理</a>
             </li>

@@ -61,7 +61,6 @@ function delSell() {
         success: function (data) {
             if (data.success) {
                 getSellByParamsUn();
-
             }
         }
     });
@@ -146,7 +145,7 @@ function refreshSells(list) {
 }
 
 
-//查询后刷新未完成销售列表
+//查询后刷新外网销售列表
 function refreshSellsUn(list) {
     sellArrUn = list;
     var tBody = '';
@@ -154,10 +153,11 @@ function refreshSellsUn(list) {
         //设置每行供应商内容
         var tr = "<tr><td>" + item.goodsEntity.name + "</td><td>" + item.customerEntity.companyName + "</td><td>" + formateTimestap(item.sell.sellTime) + "</td>"
             + "<td>" + item.sell.unitPrice + "</td><td>" +item.sell.totalNumber+"</td><td>"+ item.sell.totalPrice + "</td><td>" + item.sell.paid + "</td>"
-            + "<td>" + (item.sell.totalPrice - item.sell.paid)+ "</td><td>" + sureNull(item.goodsEntity.storage) + "</td><td>" +sureNull(item.goodsEntity.sales)+ "</td>"
-            + "<td>" + item.sell.comment + "</td><td style='max-width: 20px;text-align: center'>"
-            + "<input type='checkbox' name='sellCheck' onclick='sellCheck(this)' data-id='" + item.sell.id + "'  /></td>"
-            + "<td style='max-width: 20px;text-align: center'><p><span class='label label-info' onclick='update(this)' data-index='" + i + "'>修改</span></p></td>"
+            + "<td>" + (item.sell.totalPrice - item.sell.paid)+ "</td><td>" + item.goodsEntity.storage + "</td><td>" +item.goodsEntity.sales+ "</td>"
+            + "<td>" + item.sell.comment + "</td>" +
+            //"<td style='max-width: 20px;text-align: center'>"
+            //+ "<input type='checkbox' name='sellCheck' onclick='sellCheck(this)' data-id='" + item.sell.id + "'  /></td>"
+            //+ "<td style='max-width: 20px;text-align: center'><p><span class='label label-info' onclick='update(this)' data-index='" + i + "'>修改</span></p></td>"
             + "</tr>";
         tBody += tr;
 

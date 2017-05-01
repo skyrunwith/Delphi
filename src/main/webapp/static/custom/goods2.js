@@ -30,6 +30,28 @@ function getAllCategories() {
 }
 
 
+//初始化供应商下拉框
+function initCustomerSelect(){
+    $.post({
+        url:path+"/customer/getAll",
+        data: {pageIndex: customerPageIndex},
+        dataType: "json",
+        success: function (data) {
+            if(data.success) {
+                var customer =data.list.results;
+                var select = '';
+                $(customer).each(function(i,item){
+                    var option = "<option value='"+item.id+"'>"+item.companyName+"</option>";
+                    select+=option;
+                });
+                $("#customerName").html("<option data-index=''></option>");
+                $("#customerName").html(select);
+            }
+        }
+    });
+}
+
+
 
 //获取所有商品
 //param：分类id
@@ -171,6 +193,7 @@ function addOrUpdateGoods() {
         $("#storage").val(storage);
         $("#sales").val(sales);
         $("#unitPrice").val(sellPrice);
+        //initCustomerSelect(id);
     }
 
 function previous1(){

@@ -17,7 +17,7 @@
 <table class="table table-bordered" id="storageInfoList">
   <thead>
   <tr>
-    <td>名称</td><td>产地</td><td>规格</td><td>包装</td><td>备注</td><td>库存量</td><td>总进货量</td><td>进货量</td><td>总销售量</td><td>销售量</td>
+    <td>名称</td><td>产地</td><td>规格</td><td>包装</td><td>备注</td><td>库存量</td><td>总进货量</td><td>进货量</td><td>总销售量</td><td>销售量</td><td>操作</td>
   </tr>
   </thead>
   <tbody>
@@ -30,7 +30,7 @@
       <ul class="pagination">
         <li><a href="#" onclick="previous()">上一页</a></li>
         <li><a href="#" onclick="next()">下一页</a></li>
-        <li><a href="#" data-target="#queryStorage" data-toggle="modal">查询</a></li>
+        <%--<li><a href="#" data-target="#queryStorage" data-toggle="modal">查询</a></li>--%>
       </ul>
     </nav>
   </div>
@@ -68,10 +68,10 @@
           </div>
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-primary" onclick="getStorage()">确定</button>
-      </div>
+      <%--<div class="modal-footer">--%>
+        <%--<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>--%>
+        <%--<button type="button" class="btn btn-primary" onclick="getStorage()">确定</button>--%>
+      <%--</div>--%>
     </div>
   </div>
 </div>

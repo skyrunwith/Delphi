@@ -24,113 +24,112 @@
             <a class="navbar-brand">零食店进存销系统</a>
             <ul class="nav navbar-nav">
                 <li  id="basicManage" onclick="onTitleClick('basicManage')"><a href="<c:url value='/basic/info'/> ">基础信息</a></li>
-                <li class="active"  id="purchaseManage" onclick="onTitleClick('purchaseManage')"><a href="<c:url value='/basic/purchase'/> ">采购管理</a></li>
-                <li id="sellManage" onclick="onTitleClick('sellManage')"><a href="<c:url value='/basic/sell'/> ">销售管理</a></li>
-                <li id="storageManage" onclick="onTitleClick('storageManage')"><a href="<c:url value='/basic/storage'/> ">库存管理</a></li>
+                <li id="sellManage" onclick="onTitleClick('sellManage')" class="active" ><a href="<c:url value='/basic/purchase/purchasing_producer'/> ">销售管理</a></li>
+                <%--<li id="storageManage" onclick="onTitleClick('storageManage')"><a href="<c:url value='/basic/storage'/> ">库存管理</a></li>--%>
                 <li id="statistical" onclick="onTitleClick('statistical')"><a href="<c:url value='/basic/statistical'/> ">统计管理</a></li>
                 <li id="financial" onclick="onTitleClick('financial')"><a href="<c:url value='/basic/financial'/> ">财务管理</a></li>
             </ul>
         </div>
     </nav>
 </div>
-<div class="panel panel-info" style="margin: 10px">
-    <div class="panel-heading" style="min-height: 40px">
-        <div>
-        <h3 class="panel-title col-sm-2">商品采购</h3>
-        <div class="col-sm-10">
-            <a href="#" style="float: right;margin: 5px" data-toggle="modal" data-target="#add" onclick="upOption('INSERT')">新增</a>
-            <a href="#" style="float: right;margin: 5px" onclick="addOrUpdatePurchase()">保存</a>
-            <a href="#" style="float: right;margin: 5px" onclick="upOption('DELETE')">删除</a>
-            <a href="#" style="float: right;margin: 5px"data-toggle="modal" data-target="#query">查询</a>
-        </div>
-        </div>
-    </div>
-    <div class="panel-body">
-        <form>
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <input type="text" hidden="hidden" id="purchaseId">
-                    <input type="text" hidden="hidden" id="goodsId">
-                    <label for="goodsName" class="control-label">商品名称</label>
-                    <input type="text" class="form-control" id="goodsName" disabled>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <label for="producerName" class="control-label">供应商</label>
-                    <select type="text" class="form-control" id="producerName"></select>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <label for="putInTime" class="control-label">入库时间</label>
+<%--<div class="panel panel-info" style="margin: 10px">--%>
+    <%--<div class="panel-heading" style="min-height: 40px">--%>
+        <%--<div>--%>
+        <%--<h3 class="panel-title col-sm-2">商品采购</h3>--%>
+        <%--<div class="col-sm-10">--%>
+            <%--<a href="#" style="float: right;margin: 5px" data-toggle="modal" data-target="#add" onclick="upOption('INSERT')">新增</a>--%>
+            <%--<a href="#" style="float: right;margin: 5px" onclick="addOrUpdatePurchase()">保存</a>--%>
+            <%--<a href="#" style="float: right;margin: 5px" onclick="upOption('DELETE')">删除</a>--%>
+            <%--<a href="#" style="float: right;margin: 5px"data-toggle="modal" data-target="#query">查询</a>--%>
+        <%--</div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+    <%--<div class="panel-body">--%>
+        <%--<form>--%>
+            <%--<div class="col-sm-4">--%>
+                <%--<div class="form-group">--%>
+                    <%--<input type="text" hidden="hidden" id="purchaseId">--%>
+                    <%--<input type="text" hidden="hidden" id="goodsId">--%>
+                    <%--<label for="goodsName" class="control-label">商品名称</label>--%>
+                    <%--<input type="text" class="form-control" id="goodsName" disabled>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<div class="col-sm-4">--%>
+                <%--<div class="form-group">--%>
+                    <%--<label for="producerName" class="control-label">供应商</label>--%>
+                    <%--<select type="text" class="form-control" id="producerName"></select>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<div class="col-sm-4">--%>
+                <%--<div class="form-group">--%>
+                    <%--<label for="putInTime" class="control-label">入库时间</label>--%>
 
-                    <div class='input-group date' >
-                        <input type='text' class="form-control" id='putInTime' readonly/>
-                        <div class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-group">
-                    <label for="unitPrice" class="control-label">单价</label>
-                    <input type="number" class="form-control" id="unitPrice"  onchange="countTotalPrice()" min="0" readonly>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-group">
-                    <label for="totalNumber" class="control-label">进货数量</label>
-                    <input type="number" class="form-control" id="totalNumber" onchange="countTotalPrice()" min="0">
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-group">
-                    <label for="totalPrice" class="control-label">总价</label>
-                    <input type="number" disabled class="form-control" id="totalPrice">
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="form-group">
-                    <label for="payout" class="control-label">已支付</label>
-                    <input type="number" class="form-control" id="payout" min="0" onchange="countDebt()">
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="form-group">
-                    <label for="debt" class="control-label">欠款</label>
-                    <input type="text" disabled class="form-control" id="debt">
-                </div>
-            </div>
-            <div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <label for="storage" class="control-label">库存量</label>
-                        <input type="number"disabled class="form-control" id="storage">
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <label for="sales" class="control-label">销售量</label>
-                        <input type="number" disabled class="form-control" id="sales">
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group" style="visibility: hidden">
-                        <label for="zhanwei" class="control-label">销售量</label>
-                        <input type="text" class="form-control" id="zhanwei">
-                    </div>
-                </div>
-            </div>
+                    <%--<div class='input-group date' >--%>
+                        <%--<input type='text' class="form-control" id='putInTime' readonly/>--%>
+                        <%--<div class="input-group-addon">--%>
+                            <%--<span class="glyphicon glyphicon-calendar"></span>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<div class="col-sm-2">--%>
+                <%--<div class="form-group">--%>
+                    <%--<label for="unitPrice" class="control-label">单价</label>--%>
+                    <%--<input type="number" class="form-control" id="unitPrice"  onchange="countTotalPrice()" min="0" readonly>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<div class="col-sm-2">--%>
+                <%--<div class="form-group">--%>
+                    <%--<label for="totalNumber" class="control-label">进货数量</label>--%>
+                    <%--<input type="number" class="form-control" id="totalNumber" onchange="countTotalPrice()" min="0">--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<div class="col-sm-2">--%>
+                <%--<div class="form-group">--%>
+                    <%--<label for="totalPrice" class="control-label">总价</label>--%>
+                    <%--<input type="number" disabled class="form-control" id="totalPrice">--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<div class="col-sm-3">--%>
+                <%--<div class="form-group">--%>
+                    <%--<label for="payout" class="control-label">已支付</label>--%>
+                    <%--<input type="number" class="form-control" id="payout" min="0" onchange="countDebt()">--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<div class="col-sm-3">--%>
+                <%--<div class="form-group">--%>
+                    <%--<label for="debt" class="control-label">欠款</label>--%>
+                    <%--<input type="text" disabled class="form-control" id="debt">--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<div>--%>
+                <%--<div class="col-sm-3">--%>
+                    <%--<div class="form-group">--%>
+                        <%--<label for="storage" class="control-label">库存量</label>--%>
+                        <%--<input type="number"disabled class="form-control" id="storage">--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="col-sm-3">--%>
+                    <%--<div class="form-group">--%>
+                        <%--<label for="sales" class="control-label">销售量</label>--%>
+                        <%--<input type="number" disabled class="form-control" id="sales">--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="col-sm-6">--%>
+                    <%--<div class="form-group" style="visibility: hidden">--%>
+                        <%--<label for="zhanwei" class="control-label">销售量</label>--%>
+                        <%--<input type="text" class="form-control" id="zhanwei">--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+            <%--</div>--%>
 
-            <div class="form-group">
-                <label for="comment" class="control-label">备注</label>
-                <textarea class="form-control" id="comment"></textarea>
-            </div>
-        </form>
-    </div>
-</div>
+            <%--<div class="form-group">--%>
+                <%--<label for="comment" class="control-label">备注</label>--%>
+                <%--<textarea class="form-control" id="comment"></textarea>--%>
+            <%--</div>--%>
+        <%--</form>--%>
+    <%--</div>--%>
+<%--</div>--%>
 
 <div class="panel panel-info" style="margin: 10px">
     <div class="panel-heading" style="min-height: 40px">
@@ -144,8 +143,8 @@
             <tr>
                 <td>商品名称</td><td>供应商</td><td>入库时间</td><td>单价</td><td>进货数量</td><td>总价</td><td>已支付</td><td>欠款</td><td>库存量</td><td>销售量</td>
                 <td >备注</td>
-                <td style="width:5%;text-align: center"><input type="checkbox" id="purchaseCheckAllUn" onclick="purchaseCheckAll(this)" /></td>
-                <td >操作</td>
+                <%--<td style="width:5%;text-align: center"><input type="checkbox" id="purchaseCheckAllUn" onclick="purchaseCheckAll(this)" /></td>--%>
+                <%--<td >操作</td>--%>
             </tr>
             </thead>
             <tbody>
@@ -158,18 +157,18 @@
         <nav aria-label="Page navigation col-sm-11" style="text-align: center" >
             <ul class="pagination">
                 <li>
-                    <a href="#" aria-label="Previous" onclick="previousUn()">
+                    <a href="#" aria-label="Previous" onclick="previous()">
                         <span aria-hidden="true">上一页</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" aria-label="Next" onclick="nextUn()">
+                    <a href="#" aria-label="Next" onclick="next()">
                         <span aria-hidden="true">下一页</span>
                     </a>
                 </li>
-                <li > <a href="#" aria-label="confrim" onclick="confirmComplete()">
-                    <span aria-hidden="true">确认</span>
-                </a></li>
+                <%--<li > <a href="#" aria-label="confrim" onclick="confirmComplete()">--%>
+                    <%--<span aria-hidden="true">确认</span>--%>
+                <%--</a></li>--%>
             </ul>
         </nav>
     </div>
@@ -324,7 +323,7 @@
 <script type="text/javascript" src="<c:url value='/static/custom/goods1.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/static/custom/category1.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/static/custom/producer.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/static/custom/purchasing.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/static/custom/purchasing_producer.js'/>"></script>
 <script type="text/javascript" language="JavaScript">
     $(document).ready(function () {
         showTitle();
@@ -336,8 +335,8 @@
             pickerPosition: "bottom-left"
         });
         getAllCategories();
+//        initProducerSelect();
         getPurchaseByParams();
-        getPurchaseByParamsUn();
     });
 </script>
 </html>

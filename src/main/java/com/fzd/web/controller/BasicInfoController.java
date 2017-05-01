@@ -17,8 +17,11 @@ public class BasicInfoController extends BaseController{
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
     public String index(HttpSession session){
          UserEntity userEntity = (UserEntity) session.getAttribute("user");
+        if(userEntity.getType() == 1){
+            return "purchase/purchasing_producer";
+        }
         if(userEntity.getType() == 2){
-            return "purchase/purchasing";
+            return "purchase/sell_customer";
         }else if(userEntity.getType() == 3){
             return "purchase/sell";
         }
@@ -39,7 +42,17 @@ public class BasicInfoController extends BaseController{
     public String sell(){
         return "purchase/sell";
     }
-
+    //厂商销售管理
+    @RequestMapping(value = {"purchase/purchasing_producer"}, method = RequestMethod.GET)
+    public String purchaseProducer(){
+        return "purchase/purchasing_producer";
+    }
+    //客户采购管理
+    @RequestMapping(value = {"sell/sell_customer"}, method = RequestMethod.GET)
+    public String sellCustomer(){
+        return "purchase/sell_customer";
+    }
+    //库存管理
     @RequestMapping(value = {"/storage"}, method = RequestMethod.GET)
     public String storage(){
         return "purchase/storage";
@@ -47,6 +60,12 @@ public class BasicInfoController extends BaseController{
 
     @RequestMapping(value = {"/financial"}, method = RequestMethod.GET)
     public String financial(){
-        return "financial/financial";
+        return "purchase/financial";
+    }
+
+    //统计管理
+    @RequestMapping(value = {"/statistical"}, method = RequestMethod.GET)
+    public String statistical(){
+        return "purchase/goodsStatistical";
     }
 }

@@ -14,7 +14,7 @@
         var type = ${sessionScope.user.type};
         if(type == 1){ //供应商
             $("#purchaseManage").hide();
-            $("#sellManage").hide();
+//            $("#sellManage").hide();
             $("#storageManage").hide();
             $("#producerinfoTitle").hide();
             $("#clientinfoTitle").hide();
@@ -25,10 +25,17 @@
                 $("#storageManage").hide();
         }else if(type == 3){  //员工
             $("#basicManage").hide();
-            $("#sellManage").hide();
+            $("#purchaseManage").hide();
             $("#storageManage").hide();
         }
     }
+    function sureNull(str){
+        if(str == null){
+            str = "";
+        }
+        return str;
+    }
+
 </script>
 <%--
 <!-- /. FOOTER  -->

@@ -56,7 +56,7 @@
                 <form id="employeeForm">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <input type="text" hidden="hidden" id="id" name="id">
+                            <input type="text" hidden="hidden" id="id" name="id" value="0">
                             <label for="name" class="control-label">姓名</label>
                             <input type="text" class="form-control" id="name" name="name">
                         </div>

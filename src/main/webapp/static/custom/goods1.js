@@ -171,6 +171,9 @@ function addOrUpdateGoods() {
         $("#storage").val(storage);
         $("#sales").val(sales);
         $("#unitPrice").val(purchasePrice);
+
+        initProducerSelect(id);
+
     }
 
 function previous1(){

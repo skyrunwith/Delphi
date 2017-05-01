@@ -21,7 +21,7 @@ public class PurchasingEntity {
     private String comment;
     private GoodsEntity goodsByGoodsId;
     private ProducerEntity producerByProducerId;
-
+    private String state;
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -141,5 +141,14 @@ public class PurchasingEntity {
 
     public void setProducerByProducerId(ProducerEntity producerByProducerId) {
         this.producerByProducerId = producerByProducerId;
+    }
+    @Basic
+    @Column(name = "state")
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }

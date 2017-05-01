@@ -34,11 +34,11 @@ public class LoginController extends BaseController{
                    map.put("msg", "");
                    session.setAttribute("user", userEntity);
                }else{
-                   map.put("success", "fail1");
+                   map.put("success", false);
                    map.put("msg", "密码不正确");
                }
            }else {
-               map.put("success", "fail");
+               map.put("success", false);
                map.put("msg", "账号不存在");
            }
        }catch (Exception e){

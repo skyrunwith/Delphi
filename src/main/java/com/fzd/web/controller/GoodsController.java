@@ -74,6 +74,12 @@ public class GoodsController extends BaseController{
         return map;
     }
 
+    /**
+     * 通过分类查找各自的商品
+     * @param pageIndex
+     * @param categoryId
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = {"/getAll"}, method = RequestMethod.POST)
     public Map<String, Object> getGoods(@RequestParam(value = "pageIndex") Integer pageIndex, Integer categoryId){

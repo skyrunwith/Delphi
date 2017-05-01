@@ -1,8 +1,10 @@
 package com.fzd.web.controller;
 
+import com.fzd.dao.CategoryDao;
 import com.fzd.dao.PageResults;
 import com.fzd.dao.ProducerDao;
 import com.fzd.dao.UserDao;
+import com.fzd.model.CategoryEntity;
 import com.fzd.model.ProducerEntity;
 import com.fzd.model.UserEntity;
 import org.hibernate.Session;
@@ -28,7 +30,8 @@ public class ProducerController extends BaseController{
 
     @Autowired
     private UserDao userDao;
-
+    @Autowired
+    private CategoryDao categoryDao;
     @Autowired
     private SessionFactory sessionFactory;
     @ResponseBody
@@ -38,7 +41,7 @@ public class ProducerController extends BaseController{
             UserEntity user = new UserEntity();
             user.setUsername(producerEntity.getEmail());
             user.setPassword("123456");
-            user.setType(2);
+            user.setType(1);
             producerEntity.setUserEntity(user);
             producerDao.saveOrUpdate(producerEntity);
             map = new HashMap<>();
@@ -64,12 +67,19 @@ public class ProducerController extends BaseController{
         return map;
     }
 
+    /**
+     * 通过商品id查询厂商
+     * @param pageIndex
+     * @param id
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = {"/getAll"}, method = RequestMethod.POST)
-    public Map<String, Object> getProducers(@RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex){
+    public Map<String, Object> getProducers(@RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex, int id){
         try{
             PageResults<ProducerEntity> list;
-            list = (PageResults<ProducerEntity>) producerDao.findPageByFetchedHql("from ProducerEntity p", null, pageIndex, pageSize);
+            CategoryEntity categoryEntity = (CategoryEntity) categoryDao.load(id);
+            list = (PageResults<ProducerEntity>) producerDao.findPageByFetchedHql("from ProducerEntity p where p.id = ?", null, pageIndex, pageSize,categoryEntity.getProducer().getId());
             map = new HashMap<>();
             map.put("list",list);
             map.put("success", true);

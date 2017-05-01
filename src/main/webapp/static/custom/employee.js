@@ -109,7 +109,7 @@ function resetForm(){
     $("#college").val("");
     $("#position").val("");
     $("#career").val("");
-    $("#id").val("");
+    $("#id").val("0");
 }
 
 function delEmployee(){

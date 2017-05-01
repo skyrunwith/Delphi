@@ -31,9 +31,9 @@ public class StorageController extends BaseController{
     private PurchaseDao purchaseDao;
     @RequestMapping(value = {"/getAll"})
     @ResponseBody
-    public Map<String,Object> getAll(String beginTime, String endTime ,int pageIndex){
+    public Map<String,Object> getAll(String beginTime, String endTime ,int pageIndex ,String productName){
         try {
-            PageResults<GoodsEntity> pageResults = goodsDao.findPageByFetchedHql("from GoodsEntity g", null, pageIndex, pageSize);
+            PageResults<GoodsEntity> pageResults = goodsDao.findPageByFetchedHql("from GoodsEntity g where g.name like ?", null, pageIndex, pageSize, "%"+productName +"%");
             List<GoodsEntity> list = pageResults.getResults();
             PageResults<StoragePO> storagePOPageResults = new PageResults<>();
             List<StoragePO> storageList = new ArrayList<>();
@@ -74,7 +74,7 @@ public class StorageController extends BaseController{
         try{
             GoodsEntity goodsEntity = (GoodsEntity) goodsDao.load(id);
             goodsEntity.setLose(BigDecimal.valueOf(lose));
-            goodsEntity.setStorage(goodsEntity.getStorage().subtract(BigDecimal.valueOf(lose)));
+            goodsEntity.setStorage(goodsEntity.getStorage().subtract(BigDecimal.valueOf(lose)).add(goodsEntity.getLose()));
             goodsDao.save(goodsEntity);
             map = new HashMap<>();
             map.put("success", true);
