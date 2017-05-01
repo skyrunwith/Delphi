@@ -18,7 +18,7 @@ public class BasicInfoController extends BaseController{
     public String index(HttpSession session){
          UserEntity userEntity = (UserEntity) session.getAttribute("user");
         if(userEntity.getType() == 1){
-            return "purchase/purchasing_producer";
+            return "basic/basicinfo";
         }
         if(userEntity.getType() == 2){
             return "purchase/sell_customer";
@@ -34,12 +34,21 @@ public class BasicInfoController extends BaseController{
     }
 
     @RequestMapping(value = {"/purchase"}, method = RequestMethod.GET)
-    public String purchase(){
+    public String purchase(HttpSession session){
+
+        UserEntity userEntity = (UserEntity) session.getAttribute("user");
+        if(userEntity.getType() == 2){
+            return "purchase/sell_customer";
+        }
         return "purchase/purchasing";
     }
 
     @RequestMapping(value = {"/sell"}, method = RequestMethod.GET)
-    public String sell(){
+    public String sell(HttpSession session){
+        UserEntity userEntity = (UserEntity) session.getAttribute("user");
+        if(userEntity.getType() == 1){
+            return "purchase/purchasing_producer";
+        }
         return "purchase/sell";
     }
     //厂商销售管理

@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="../templates/header.jsp"></jsp:include>
-<title>销售管理</title>
+<title>采购管理</title>
 </head>
 <body>
 <%--<jsp:include page="../templates/navbar.jsp"></jsp:include>--%>
@@ -25,9 +25,9 @@
             <ul class="nav navbar-nav">
                 <li id="basicManage" onclick="onTitleClick('basicManage')"><a
                         href="<c:url value='/basic/info'/> ">基础信息</a></li>
-                <li id="purchaseManage" onclick="onTitleClick('purchaseManage')"><a
+                <li id="purchaseManage" class="active" onclick="onTitleClick('purchaseManage')"><a
                         href="<c:url value='/basic/sell/sell_customer'/> ">采购管理</a></li>
-                <li class="active" id="sellManage" onclick="onTitleClick('sellManage')"><a
+                <li  id="sellManage" onclick="onTitleClick('sellManage')"><a
                         href="<c:url value='/basic/sell'/> ">销售管理</a></li>
                 <li id="storageManage" onclick="onTitleClick('storageManage')"><a
                         href="<c:url value='/basic/storage'/> ">库存管理</a></li>
