@@ -267,3 +267,10 @@ function confirmComplete(){
         }
     });
 }
+
+
+
+function query(){
+    getSellByParams();
+    getSellByParamsUn();
+}

@@ -156,23 +156,23 @@ function init(){
 }
 
 //获取所有库存信息
-function getChartData1(){
+function getStorageChartData(){
     var beginTime =  Date.parse($("#beginTime1").val());
     var endTime =  Date.parse($("#endTime1").val());
     var goodsName =  $("#goodsName1").val();
     $.post({
-        url: path+"/sell/getChartData",
+        url: path+"/storage/getStorageChartData",
         data: {beginTime: beginTime, endTime: endTime,goodsName:goodsName},
         dataType: "json",
         success: function (data) {
             if(data.success){
-                updateSellChart(data.list);
+                updateStorageChart(data.list);
             }
         }
     });
 }
 
-function updateSellChart(list){
+function updateStorageChart(list){
     var ctx = document.getElementById("myChart");
     var labels = new Array();
     var backgroundColor = new Array();

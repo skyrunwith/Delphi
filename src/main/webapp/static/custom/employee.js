@@ -44,7 +44,7 @@ function setEmployee(list){
             +"<td>" +item.major+"</td><td>"+item.career+"</td>"
             +"<td style='max-width: 20px;text-align: center'>"
             +"<input type='checkbox' name='employeeCheck' onclick='employeeCheck(this)'  data-name='"+item.name+"' data-id='"+item.id+"'  /></td>"
-            + "<td style='max-width: 20px;text-align: center'><button class='btn btn-primary' onclick='updateEmployee(this)' data-index='"+i+"'>修改</button></td>"
+            + "<td style='max-width: 20px;text-align: center'><p><span class='label label-info' onclick='updateEmployee(this)' data-index='" + i + "'>修改</span></p></td>"
             +"</tr>";
         tBody += tr;
 

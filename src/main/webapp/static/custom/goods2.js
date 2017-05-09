@@ -193,7 +193,9 @@ function addOrUpdateGoods() {
         $("#storage").val(storage);
         $("#sales").val(sales);
         $("#unitPrice").val(sellPrice);
-        //initCustomerSelect(id);
+
+        $('#sellTime').val(formateTimestap(new Date().getTime()));
+        initCustomerSelect(id);
     }
 
 function previous1(){

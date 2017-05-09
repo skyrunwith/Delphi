@@ -47,7 +47,7 @@ function setCustomer(list){
             +"<td>" +item.postalCode+"</td><td>"+item.email+"</td>"
             +"<td>"+item.comment+"</td><td style='max-width: 20px;text-align: center'>"
             +"<input type='checkbox' name='customerCheck' onclick='customerCheck(this)' data-id='"+item.id+"'  /></td>"
-            + "<td style='max-width: 20px;text-align: center'><button class='btn btn-primary' onclick='updateCustomer(this)' data-index='"+i+"' >修改</button></td>"
+            + "<td style='max-width: 20px;text-align: center'><p><span class='label label-info' onclick='updateCustomer(this)' data-index='" + i + "'>修改</span></p></td>"
             +"</tr>";
         tBody += tr;
 

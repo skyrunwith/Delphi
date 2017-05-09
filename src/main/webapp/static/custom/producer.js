@@ -44,7 +44,8 @@ function setProducer(list){
             +"<td>" +item.postalCode+"</td><td>"+item.email+"</td><td>"+item.bank+"</td><td>"+item.acctNo+"</td>"
             +"<td>"+item.comment+"</td><td style='max-width: 20px;text-align: center'>"
             +"<input type='checkbox' name='producerCheck' onclick='producerCheck(this)' data-id='"+item.id+"'  /></td>"
-            + "<td style='max-width: 20px;text-align: center'><button class='btn btn-primary' onclick='updateProducer(this)' data-index='"+i+"' >修改</button></td>"
+            //+ "<td style='max-width: 20px;text-align: center'><button class='btn btn-primary' onclick='updateProducer(this)' data-index='"+i+"' >修改</button></td>"
+            + "<td style='max-width: 20px;text-align: center'><p><span class='label label-info' onclick='updateProducer(this)' data-index='" + i + "'>修改</span></p></td>"
             +"</tr>";
         tBody += tr;
 

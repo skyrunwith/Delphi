@@ -89,7 +89,7 @@ function confirmComplete(){
 }
 function update(oj) {
     var index = oj.getAttribute("data-index");
-    var item = purchaseArr[index];
+    var item = purchaseArrUn[index];
     initProducerSelect(item.goodsEntity.id);
     $("#unitPrice").val(item.purchase.unitPrice);
     $("#totalNumber").val(item.purchase.totalNumber);
@@ -104,7 +104,7 @@ function update(oj) {
     $("#debt").val((item.purchase.totalPrice - item.purchase.payout));
     $("#purchaseId").val(item.purchase.id);
     $("#sales").val(item.goodsEntity.sales);
-    upOption("UPDATE")
+    upOption("UPDATE");
 
 }
 //获取已完成采购订单
@@ -120,9 +120,9 @@ function getPurchaseByParams(){
                 $("#query").modal("hide");
                 refreshPurchases(data.list);
                 resetPurchaseForm();
-                if(pageCount < 0){
+                //if(pageCount < 0){
                     pageCount = data.pageCount;
-                }
+                //}
             }
         }
     });
@@ -141,9 +141,9 @@ function getPurchaseByParamsUn(){
                 $("#query").modal("hide");
                 refreshPurchasesUn(data.list);
                 resetPurchaseForm();
-                if(pageCount < 0){
-                    pageCount = data.pageCount;
-                }
+                //if(pageCountUn < 0){
+                    pageCountUn = data.pageCount;
+                //}
             }
         }
     });
@@ -180,7 +180,7 @@ function refreshPurchasesUn(list) {
                 + "<td>" + item.purchase.comment + "</td>" +
                 "<td style='max-width: 20px;text-align: center'>"
                 + "<input type='checkbox' name='purchaseCheck' onclick='purchaseCheck(this)' data-id='" + item.purchase.id + "'  /></td>"
-                + "<td style='max-width: 20px;text-align: center'><p><span class='label label-info' onclick='update(this)' data-index='" + i + "'>修改</span></p></td>"
+                + "<td style='max-width: 20px;text-align: center'><p><a href='#' class='label label-info' onclick='update(this)' data-index='" + i + "'>修改</a></p></td>"
                 + "</tr>";
             tBodyUn += tr;
         }
@@ -194,13 +194,15 @@ function purchaseCheckAll(oj){
 //单个复选框选择,判断(全选)复选框是否需要选择
 function purchaseCheck(oj){
     var $purchaseCheck = $("input[name = 'purchaseCheck']");
-    $("input[id = 'purchaseCheckAll']").prop("checked",$purchaseCheck.length == $("input[name='purchaseCheck']:checked").length ? true : false);
+    $("input[id = 'purchaseCheckAllUn']").prop("checked",$purchaseCheck.length == $("input[name='purchaseCheck']:checked").length ? true : false);
 }
 
 
 //初始化供应商下拉框
 //参数：商品id
 function initProducerSelect(id){
+
+    $('#putInTime').val(formateTimestap(new Date().getTime()));
     $.post({
         url:path+"/producer/getAll",
         data: {pageIndex: producerPageIndex,id:id},
@@ -249,8 +251,8 @@ function formateTimestap(dateStr){
 }
 
 function resetPurchaseForm() {
-    $("#queryGoodsName").val("");
-    $("#queryProducerName").val("");
+    //$("#queryGoodsName").val("");
+    //$("#queryProducerName").val("");
     $("#goodsName").val("");
     $("#producerName").val("");
     $("#putInTime").val("");
@@ -296,4 +298,11 @@ function nextUn(){
         pageIndexUn++;
         getPurchaseByParamsUn();
     }
+}
+
+
+
+function query(){
+    getPurchaseByParams();
+    getPurchaseByParamsUn();
 }

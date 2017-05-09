@@ -24,7 +24,14 @@ function addOrUpdateSell(){
     data.sell = sell;
     data.customerId = $("#customerName").val();
     data.goodsId = $("#goodsId").val();
-
+    if(sell.totalNumber > $('#storage').val()){
+        alert('库存不够');
+        return;
+    }
+    if(sell.totalPrice < sell.paid){
+        alert('支付款大于总价');
+        return;
+    }
     $.post({
         url: path + "/sell/add",
         dataType: "json",
@@ -84,7 +91,7 @@ function update(oj) {
     $("#debt").val((item.sell.totalPrice - item.sell.paid));
     $("#sellId").val(item.sell.id);
     $("#sales").val(item.goodsEntity.sales);
-    upOption("UPDATE")
+    upOption("UPDATE");
 }
 //查询已完成销售订单
 function getSellByParams(){
@@ -157,7 +164,7 @@ function refreshSellsUn(list) {
             + "<td>" + (item.sell.totalPrice - item.sell.paid)+ "</td><td>" + sureNull(item.goodsEntity.storage) + "</td><td>" +sureNull(item.goodsEntity.sales)+ "</td>"
             + "<td>" + item.sell.comment + "</td><td style='max-width: 20px;text-align: center'>"
             + "<input type='checkbox' name='sellCheck' onclick='sellCheck(this)' data-id='" + item.sell.id + "'  /></td>"
-            + "<td style='max-width: 20px;text-align: center'><p><span class='label label-info' onclick='update(this)' data-index='" + i + "'>修改</span></p></td>"
+            + "<td style='max-width: 20px;text-align: center'><p><a href='#' class='label label-info' onclick='update(this)' data-index='" + i + "'>修改</a></p></td>"
             + "</tr>";
         tBody += tr;
 
@@ -171,7 +178,7 @@ function sellCheckAll(oj){
 //单个复选框选择,判断(全选)复选框是否需要选择
 function sellCheck(oj){
     var $sellCheck = $("input[name = 'sellCheck']");
-    $("input[id = 'sellCheckAll']").prop("checked",$sellCheck.length == $("input[name='sellCheck']:checked").length ? true : false);
+    $("input[id = 'sellCheckAllUn']").prop("checked",$sellCheck.length == $("input[name='sellCheck']:checked").length ? true : false);
 }
 
 
@@ -266,4 +273,11 @@ function confirmComplete(){
             }
         }
     });
+}
+
+
+
+function query(){
+    getSellByParams();
+    getSellByParamsUn();
 }

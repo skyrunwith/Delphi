@@ -250,3 +250,10 @@ function next(){
         getStorage();
     }
 }
+
+
+
+function query(){
+    getPurchaseByParams();
+    getPurchaseByParamsUn();
+}

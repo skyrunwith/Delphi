@@ -65,7 +65,8 @@ function refreshGoods(goods){
             "</td><td>"+item.packaging+"</td><td>" + sureNull(item.purchasePrice)+"</td><td>"+ sureNull(item.sellPrice)
             +"</td><td>" +item.comment+"</td>"+"<td style='max-width: 20px;text-align: center'>" +
             "<input type='checkbox' name='goodsCheck' onclick='goodsCheck(this)' data-id='"+item.id+"'  /></td>"
-            + "<td style='max-width: 20px;text-align: center'><button class='btn btn-primary' onclick='updateGoods(this)' data-index='"+i+"' >修改</button></td>"
+            //+ "<td style='max-width: 20px;text-align: center'><button class='btn btn-primary' onclick='updateGoods(this)' data-index='"+i+"' >修改</button></td>"
+            + "<td style='max-width: 20px;text-align: center'><p><span class='label label-info' onclick='updateGoods(this)' data-index='" + i + "'>修改</span></p></td>"
             +"</tr>";
         tBody += tr;
         $("#goodsTb tbody").html(tBody);
