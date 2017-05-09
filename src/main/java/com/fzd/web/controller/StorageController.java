@@ -85,4 +85,38 @@ public class StorageController extends BaseController{
     }
 
 
+
+    /**
+     * 库存量统计图
+     * @param beginTime
+     * @param endTime
+     * @param goodsName
+     * @return
+     */
+    @RequestMapping(value = {"/getStorageChartData"})
+    @ResponseBody
+    public Map<String,Object> getStorageChartData(String beginTime, String endTime,String goodsName){
+        try {
+            //查找商品
+            GoodsEntity goodsEntity = (GoodsEntity) goodsDao.getByHQL("from GoodsEntity s where s.name like ?", "%" + goodsName + "%");
+            //查找商品在某时间段的销售情况
+            List<Object[]> list = goodsDao.findListByhql("select g.id ,g.name,g.storage from goods g GROUP BY g.category_id,g.id", new Timestamp(Long.valueOf(beginTime)), new Timestamp(Long.valueOf(endTime)), goodsEntity.getId());
+            List<Map<String,Object>> list1 = new ArrayList<>();
+            for(Object[] item : list){
+                Map<String,Object> mapChart = new HashMap<>();
+                mapChart.put("year", item[0]);
+                mapChart.put("month", item[1]);
+                mapChart.put("sell", item[2]);
+//                mapChart.put("goodName", item[]);
+                list1.add(mapChart);
+            }
+            map = new HashMap<>();
+            map.put("list", list1);
+            map.put("success", true);
+        }catch (Exception e){
+            map.put("success", false);
+        }
+        return map;
+    }
+
 }

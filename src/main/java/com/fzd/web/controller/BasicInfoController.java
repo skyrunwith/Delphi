@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping(value = {"/basic"})
 public class BasicInfoController extends BaseController{
 
-    @RequestMapping(value = {"/"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/in"}, method = RequestMethod.GET)
     public String index(HttpSession session){
          UserEntity userEntity = (UserEntity) session.getAttribute("user");
         if(userEntity.getType() == 1){

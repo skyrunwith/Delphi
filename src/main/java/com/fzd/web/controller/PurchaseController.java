@@ -227,20 +227,22 @@ public class PurchaseController extends BaseController{
     @ResponseBody
     public Map<String,Object> getPurchaseChartData(String beginTime, String endTime,String goodsName){
         try {
+            Date endDatte = new Date(Long.parseLong(endTime));
+            endDatte.setMonth(endDatte.getMonth()+1);
             //查找商品
-            List<GoodsEntity> goodsEntitys = (List<GoodsEntity>) goodsDao.getListByHQL("from GoodsEntity s where s.name like ?", "%" + goodsName + "%");
+            List<GoodsEntity> goodsEntitys = (List<GoodsEntity>) goodsDao.getListByHQL("from GoodsEntity s where s.name like ? and s.totalStorage > 0", "%" + goodsName + "%");
             List< List<Map<String, Object>>> chartList = new ArrayList<>();
             for (GoodsEntity goodsEntity : goodsEntitys) {
                 //查找商品在某时间段的销售情况
                 List<Object[]> list = goodsDao.findListByhql("select year(s.putInTime),month(s.putInTime),sum(s.totalNumber) from PurchasingEntity s where s.putInTime >= ? and s.putInTime <= ? and s.goodsByGoodsId.id = ? and s.state = 1 group by year(s.putInTime)" +
-                        ",month(s.putInTime)", new Timestamp(Long.valueOf(beginTime)), new Timestamp(Long.valueOf(endTime)), goodsEntity.getId());
+                        ",month(s.putInTime)", new Timestamp(Long.valueOf(beginTime)), new Timestamp(endDatte.getTime()), goodsEntity.getId());
                 List<Map<String, Object>> list1 = new ArrayList<>();
                 for (Object[] item : list) {
                     Map<String, Object> mapChart = new HashMap<>();
                     mapChart.put("year", item[0]);
                     mapChart.put("month", item[1]);
                     mapChart.put("purchase", item[2]);
-                    mapChart.put("goodName", goodsEntity.getId());
+                    mapChart.put("goodName", goodsEntity.getName());
                     list1.add(mapChart);
                 }
                 chartList.add(list1);

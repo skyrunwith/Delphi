@@ -18,10 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by FZD on 2017/3/26.
@@ -97,28 +94,28 @@ public class SellController extends BaseController{
     public Map<String, Object> deleteSell(@RequestParam(value = "id",required = false, defaultValue = "")Integer[] ids){
         try{
             for(Integer item : ids){
-                SellEntity sellEntity= (SellEntity) sellDao.getByHQL("from SellEntity p where p.id = ?", item);
-                GoodsEntity goodsEntity = (GoodsEntity) goodsDao.get(sellEntity.getGoodsByGoodsId().getId());
-                //??????
-                BigDecimal storeDeviation = BigDecimal.valueOf(0);
-                //???????
-                BigDecimal salesDeviation = BigDecimal.valueOf(0);
-
-                storeDeviation = sellEntity.getTotalNumber();
-                salesDeviation = sellEntity.getTotalNumber();
-
-                BigDecimal storage = goodsEntity.getStorage();
-                BigDecimal sales = goodsEntity.getSales();
-                if(storage == null){
-                    storage = BigDecimal.valueOf(0);
-                }
-                if(sales == null){
-                    sales = BigDecimal.valueOf(0);
-                }
-
-                goodsEntity.setSales(sales.subtract(salesDeviation));
-                goodsEntity.setStorage(storage.add(storeDeviation));
-                goodsDao.saveOrUpdate(goodsEntity);
+//                SellEntity sellEntity= (SellEntity) sellDao.getByHQL("from SellEntity p where p.id = ?", item);
+//                GoodsEntity goodsEntity = (GoodsEntity) goodsDao.get(sellEntity.getGoodsByGoodsId().getId());
+//                //??????
+//                BigDecimal storeDeviation = BigDecimal.valueOf(0);
+//                //???????
+//                BigDecimal salesDeviation = BigDecimal.valueOf(0);
+//
+//                storeDeviation = sellEntity.getTotalNumber();
+//                salesDeviation = sellEntity.getTotalNumber();
+//
+//                BigDecimal storage = goodsEntity.getStorage();
+//                BigDecimal sales = goodsEntity.getSales();
+//                if(storage == null){
+//                    storage = BigDecimal.valueOf(0);
+//                }
+//                if(sales == null){
+//                    sales = BigDecimal.valueOf(0);
+//                }
+//
+//                goodsEntity.setSales(sales.subtract(salesDeviation));
+//                goodsEntity.setStorage(storage.add(storeDeviation));
+//                goodsDao.saveOrUpdate(goodsEntity);
                 sellDao.deleteById(item);
             }
             map = new HashMap<>();
@@ -167,21 +164,29 @@ public class SellController extends BaseController{
     @ResponseBody
     public Map<String,Object> getSellChartData(String beginTime, String endTime,String goodsName){
         try {
+            Date endDatte = new Date(Long.parseLong(endTime));
+            endDatte.setMonth(endDatte.getMonth()+1);
             //查找商品
-            GoodsEntity goodsEntity = (GoodsEntity) goodsDao.getByHQL("from GoodsEntity s where s.name like ?", "%" + goodsName + "%");
-            //查找商品在某时间段的销售情况
-            List<Object[]> list = goodsDao.findListByhql("select year(s.sellTime),month(s.sellTime),sum(s.totalNumber) from SellEntity s where s.sellTime >= ? and s.sellTime <= ? and s.goodsByGoodsId.id = ? group by year(s.sellTime)" +
-                    ",month(s.sellTime)", new Timestamp(Long.valueOf(beginTime)), new Timestamp(Long.valueOf(endTime)), goodsEntity.getId());
-            List<Map<String,Object>> list1 = new ArrayList<>();
-            for(Object[] item : list){
-                Map<String,Object> mapChart = new HashMap<>();
-                mapChart.put("year", item[0]);
-                mapChart.put("month", item[1]);
-                mapChart.put("sell", item[2]);
-                list1.add(mapChart);
+            List<GoodsEntity> goodsEntitys=  goodsDao.getListByHQL("from GoodsEntity s where s.name like ? and s.totalStorage > 0", "%" + goodsName + "%");
+
+            List< List<Map<String, Object>>> chartList = new ArrayList<>();
+            for (GoodsEntity goodsEntity : goodsEntitys) {
+                //查找商品在某时间段的销售情况
+                List<Object[]> list = goodsDao.findListByhql("select year(s.sellTime),month(s.sellTime),sum(s.totalNumber) from SellEntity s where s.sellTime >= ? and s.sellTime <= ? and s.goodsByGoodsId.id = ? group by year(s.sellTime)" +
+                    ",month(s.sellTime)", new Timestamp(Long.valueOf(beginTime)), new Timestamp(endDatte.getTime()), goodsEntity.getId());
+                List<Map<String, Object>> list1 = new ArrayList<>();
+                for (Object[] item : list) {
+                    Map<String, Object> mapChart = new HashMap<>();
+                    mapChart.put("year", item[0]);
+                    mapChart.put("month", item[1]);
+                    mapChart.put("purchase", item[2]);
+                    mapChart.put("goodName", goodsEntity.getName());
+                    list1.add(mapChart);
+                }
+                chartList.add(list1);
             }
             map = new HashMap<>();
-            map.put("list", list1);
+            map.put("list", chartList);
             map.put("success", true);
         }catch (Exception e){
             map.put("success", false);
@@ -190,39 +195,6 @@ public class SellController extends BaseController{
     }
 
 
-
-    /**
-     * 库存量统计图
-     * @param beginTime
-     * @param endTime
-     * @param goodsName
-     * @return
-     */
-    @RequestMapping(value = {"/getStorageChartData"})
-    @ResponseBody
-    public Map<String,Object> getStorageChartData(String beginTime, String endTime,String goodsName){
-        try {
-            //查找商品
-            GoodsEntity goodsEntity = (GoodsEntity) goodsDao.getByHQL("from GoodsEntity s where s.name like ?", "%" + goodsName + "%");
-            //查找商品在某时间段的销售情况
-            List<Object[]> list = goodsDao.findListByhql("select year(s.sellTime),month(s.sellTime),sum(s.totalNumber) from SellEntity s where s.sellTime >= ? and s.sellTime <= ? and s.goodsByGoodsId.id = ? group by year(s.sellTime)" +
-                    ",month(s.sellTime)", new Timestamp(Long.valueOf(beginTime)), new Timestamp(Long.valueOf(endTime)), goodsEntity.getId());
-            List<Map<String,Object>> list1 = new ArrayList<>();
-            for(Object[] item : list){
-                Map<String,Object> mapChart = new HashMap<>();
-                mapChart.put("year", item[0]);
-                mapChart.put("month", item[1]);
-                mapChart.put("sell", item[2]);
-                list1.add(mapChart);
-            }
-            map = new HashMap<>();
-            map.put("list", list1);
-            map.put("success", true);
-        }catch (Exception e){
-            map.put("success", false);
-        }
-        return map;
-    }
 
     @ResponseBody
     @RequestMapping(value = {"/confirmComplete"}, method = RequestMethod.POST)

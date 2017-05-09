@@ -24,6 +24,7 @@ public class LoginController extends BaseController{
    @RequestMapping(value = "/", method = RequestMethod.POST)
    @ResponseBody
    public Map<String, Object> login(String username, String password,HttpSession session){
+       session.setMaxInactiveInterval(900);
        try{
            map = new HashMap<>();
            UserEntity userEntity = userDao.findByUserName("from UserEntity u where u.username = ?", username);
