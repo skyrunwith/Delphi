@@ -33,10 +33,10 @@
             <div>
                 <nav aria-label="Page navigation col-sm-11" style="text-align: center">
                     <ul class="pagination">
-                        <li><a href="#" onclick="previousCategory()">上一页</a></li>
-                        <li><a href="#" onclick="nextCategory()">下一页</a></li>
-                        <li><a href="#" data-target="#addCategoryModal" data-toggle="modal">新增</a></li>
-                        <li><a href="#" onclick="deleteCategory()">删除</a></li>
+                        <li><a  onclick="previousCategory()">上一页</a></li>
+                        <li><a  onclick="nextCategory()">下一页</a></li>
+                        <li><a  data-target="#addCategoryModal" data-toggle="modal">新增</a></li>
+                        <li><a  onclick="deleteCategory()">删除</a></li>
                     </ul>
                 </nav>
             </div>

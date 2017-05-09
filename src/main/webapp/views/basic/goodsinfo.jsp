@@ -9,7 +9,7 @@
     <div class="panel-body">
         <div class="col-sm-1">
             <div class="list-group" style="margin-bottom: -1px">
-                <a href="#" class="list-group-item active "
+                <a  class="list-group-item active "
                    style="border-bottom-left-radius: 0px;border-bottom-right-radius: 0px">
                     分类
                 </a>
@@ -20,8 +20,8 @@
             <div>
                 <nav aria-label="Page navigation col-sm-11" style="text-align: center">
                     <ul class="pagination">
-                        <li><a href="#" onclick="previousCategory()"> <span aria-hidden="true">&laquo;</span></a></li>
-                        <li><a href="#" onclick="nextCategory()"> <span aria-hidden="true">&raquo;</span></a></li>
+                        <li><a  onclick="previousCategory()"> <span aria-hidden="true">&laquo;</span></a></li>
+                        <li><a  onclick="nextCategory()"> <span aria-hidden="true">&raquo;</span></a></li>
                     </ul>
                 </nav>
             </div>
@@ -56,17 +56,17 @@
         <nav aria-label="Page navigation col-sm-11" style="text-align: center">
             <ul class="pagination">
                 <li>
-                    <a href="#" aria-label="Previous" onclick="previous()">
+                    <a  aria-label="Previous" onclick="previous()">
                         <span aria-hidden="true">上一页</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" aria-label="Next" onclick="next()">
+                    <a  aria-label="Next" onclick="next()">
                         <span aria-hidden="true">下一页</span>
                     </a>
                 </li>
-                <li><a href="#" data-toggle="modal" data-target="#addGoodsModal">新增</a></li>
-                <li><a href="#" id="delGoods" onclick="delGoods()">删除</a></li>
+                <li><a  data-toggle="modal" data-target="#addGoodsModal">新增</a></li>
+                <li><a  id="delGoods" onclick="delGoods()">删除</a></li>
             </ul>
         </nav>
 

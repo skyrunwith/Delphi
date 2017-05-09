@@ -153,7 +153,7 @@
           <label for="beginTime1" class="control-label">起始日期</label>
 
           <div class='input-group date' >
-            <input type='text' class="form-control" id='beginTime1' value="<%=new SimpleDateFormat("yyyy-MM-dd").format(previous)%>" readonly/>
+            <input type='text' class="form-control" id='beginTime1' value="<%=new SimpleDateFormat("yyyy-MM").format(previous)%>" readonly/>
             <div class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
             </div>
@@ -165,7 +165,7 @@
           <label for="endTime1" class="control-label" >截止日期</label>
 
           <div class='input-group date' >
-            <input type='text' class="form-control" id='endTime1' value="<%=new SimpleDateFormat("yyyy-MM-dd").format(current)%>" readonly/>
+            <input type='text' class="form-control" id='endTime1' value="<%=new SimpleDateFormat("yyyy-MM").format(current)%>" readonly/>
             <div class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
             </div>
@@ -175,7 +175,7 @@
       <div class="col-sm-2">
         <div class="form-group">
           <label  class="control-label"></label>
-          <a class='btn btn-primary form-control'  onclick='getChartData1()'  style="width: 50px;margin-top: 26px">查询</a>
+          <a class='btn btn-primary form-control'  onclick='getStorageChartData()'  style="width: 50px;margin-top: 26px">查询</a>
         </div>
       </div>
       <div class="col-sm-4">

@@ -21,8 +21,8 @@
   <div>
     <nav aria-label="Page navigation col-sm-11" style="text-align: center" >
       <ul class="pagination">
-        <li><a href="#" onclick="previousModify()">上一页</a></li>
-        <li><a href="#" onclick="nextModify()">下一页</a></li>
+        <li><a  onclick="previousModify()">上一页</a></li>
+        <li><a  onclick="nextModify()">下一页</a></li>
       </ul>
     </nav>
   </div>

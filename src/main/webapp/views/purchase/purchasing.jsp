@@ -1,3 +1,5 @@
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
 <%--
   Created by IntelliJ IDEA.
   User: FZD
@@ -8,11 +10,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="../templates/header.jsp"></jsp:include>
+<%
+    Date current = new Date();
+%>
 <title>采购管理</title>
 </head>
 <body>
 <%--<jsp:include page="../templates/navbar.jsp"></jsp:include>--%>
-<div id="wrapper">
+<div id="wrapper">MySQL - delphi@localhost
     <nav class="navbar navbar-default navbar-cls-top" role="navigation"  >
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
@@ -38,15 +43,15 @@
         <div>
         <h3 class="panel-title col-sm-2">商品采购</h3>
         <div class="col-sm-10">
-            <a href="#" style="float: right;margin: 5px" data-toggle="modal" data-target="#add" onclick="upOption('INSERT')">新增</a>
-            <a href="#" style="float: right;margin: 5px" onclick="addOrUpdatePurchase()">保存</a>
-            <a href="#" style="float: right;margin: 5px" onclick="upOption('DELETE')">删除</a>
-            <a href="#" style="float: right;margin: 5px"data-toggle="modal" data-target="#query">查询</a>
+            <a  style="float: right;margin: 5px" data-toggle="modal" data-target="#add" onclick="upOption('INSERT')">新增</a>
+            <a  style="float: right;margin: 5px" onclick="addOrUpdatePurchase()">保存</a>
+            <a  style="float: right;margin: 5px" onclick="upOption('DELETE')">删除</a>
+            <a  style="float: right;margin: 5px"data-toggle="modal" data-target="#query">查询</a>
         </div>
         </div>
     </div>
     <div class="panel-body">
-        <form>
+        <form id="purchaseForm">
             <div class="col-sm-4">
                 <div class="form-group">
                     <input type="text" hidden="hidden" id="purchaseId">
@@ -58,7 +63,7 @@
             <div class="col-sm-4">
                 <div class="form-group">
                     <label for="producerName" class="control-label">供应商</label>
-                    <select type="text" class="form-control" id="producerName"></select>
+                    <select type="text" class="form-control" id="producerName" required></select>
                 </div>
             </div>
             <div class="col-sm-4">
@@ -66,7 +71,7 @@
                     <label for="putInTime" class="control-label">入库时间</label>
 
                     <div class='input-group date' >
-                        <input type='text' class="form-control" id='putInTime' readonly/>
+                        <input type='text' class="form-control" id='putInTime' required readonly/>
                         <div class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </div>
@@ -76,13 +81,13 @@
             <div class="col-sm-2">
                 <div class="form-group">
                     <label for="unitPrice" class="control-label">单价</label>
-                    <input type="number" class="form-control" id="unitPrice"  onchange="countTotalPrice()" min="0" readonly>
+                    <input type="number" class="form-control" id="unitPrice"  onchange="countTotalPrice()"  required readonly>
                 </div>
             </div>
             <div class="col-sm-2">
                 <div class="form-group">
                     <label for="totalNumber" class="control-label">进货数量</label>
-                    <input type="number" class="form-control" id="totalNumber" onchange="countTotalPrice()" min="0">
+                    <input type="number" class="form-control" id="totalNumber" onchange="countTotalPrice()" required min="1">
                 </div>
             </div>
             <div class="col-sm-2">
@@ -94,7 +99,7 @@
             <div class="col-sm-3">
                 <div class="form-group">
                     <label for="payout" class="control-label">已支付</label>
-                    <input type="number" class="form-control" id="payout" min="0" onchange="countDebt()">
+                    <input type="number" class="form-control" id="payout" min="1" onchange="countDebt()" required>
                 </div>
             </div>
             <div class="col-sm-3">
@@ -158,16 +163,16 @@
         <nav aria-label="Page navigation col-sm-11" style="text-align: center" >
             <ul class="pagination">
                 <li>
-                    <a href="#" aria-label="Previous" onclick="previousUn()">
+                    <a  aria-label="Previous" onclick="previousUn()">
                         <span aria-hidden="true">上一页</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" aria-label="Next" onclick="nextUn()">
+                    <a  aria-label="Next" onclick="nextUn()">
                         <span aria-hidden="true">下一页</span>
                     </a>
                 </li>
-                <li > <a href="#" aria-label="confrim" onclick="confirmComplete()">
+                <li > <a  aria-label="confrim" onclick="confirmComplete()">
                     <span aria-hidden="true">确认</span>
                 </a></li>
             </ul>
@@ -201,12 +206,12 @@
         <nav aria-label="Page navigation col-sm-11" style="text-align: center" >
             <ul class="pagination">
                 <li>
-                    <a href="#" aria-label="Previous" onclick="previous()">
+                    <a  aria-label="Previous" onclick="previous()">
                         <span aria-hidden="true">上一页</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" aria-label="Next" onclick="next()">
+                    <a  aria-label="Next" onclick="next()">
                         <span aria-hidden="true">下一页</span>
                     </a>
                 </li>
@@ -227,7 +232,7 @@
             <div class="modal-body">
                 <div class="col-sm-2" style="float: left;padding: 0px;">
                     <div class="list-group" style="margin-bottom: -1px;text-align: center">
-                        <a href="#" class="list-group-item active " style="border-bottom-left-radius: 0px;border-bottom-right-radius: 0px;font-size: 10px;padding: 0px;min-height: 35px;text-align: center">
+                        <a  class="list-group-item active " style="border-bottom-left-radius: 0px;border-bottom-right-radius: 0px;font-size: 10px;padding: 0px;min-height: 35px;text-align: center">
                             分类
                         </a>
                     </div>
@@ -238,12 +243,12 @@
                         <nav aria-label="Page navigation col-sm-11" style="text-align: center;">
                             <ul class="pagination" style="margin-top: 0px;padding-top: 0px;">
                                 <li>
-                                    <a href="#" aria-label="Previous" onclick="previousCategory()">
+                                    <a  aria-label="Previous" onclick="previousCategory()">
                                         <span aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" aria-label="Next" onclick="nextCategory()">
+                                    <a  aria-label="Next" onclick="nextCategory()">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
                                 </li>
@@ -265,12 +270,12 @@
                     <nav aria-label="Page navigation col-sm-11" style="text-align: center">
                         <ul class="pagination" style="margin-top: 0px;padding-top: 3px;">
                             <li>
-                                <a href="#" aria-label="Previous" onclick="previous1()">
+                                <a  aria-label="Previous" onclick="previous1()">
                                     <span aria-hidden="true">上一页</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#" aria-label="Next" onclick="next1()">
+                                <a  aria-label="Next" onclick="next1()">
                                     <span aria-hidden="true">下一页</span>
                                 </a>
                             </li>
@@ -314,7 +319,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary"  onclick="getPurchaseByParams()">确定</button>
+                <button type="button" class="btn btn-primary"  onclick="query()">确定</button>
             </div>
         </div>
     </div>
@@ -327,6 +332,7 @@
 <script type="text/javascript" src="<c:url value='/static/custom/purchasing.js'/>"></script>
 <script type="text/javascript" language="JavaScript">
     $(document).ready(function () {
+        $('#purchaseForm').validate();
         showTitle();
         $('#putInTime').datetimepicker({
             format: "yyyy/mm/dd hh:ii:ss",
@@ -338,6 +344,7 @@
         getAllCategories();
         getPurchaseByParams();
         getPurchaseByParamsUn();
+
     });
 </script>
 </html>

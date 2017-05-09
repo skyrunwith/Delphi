@@ -34,10 +34,10 @@
             <div>
                 <nav aria-label="Page navigation col-sm-11" style="text-align: center">
                     <ul class="pagination">
-                        <li><a href="#">上一页</a></li>
-                        <li><a href="#">下一页</a></li>
-                        <li><a href="#" data-toggle="modal" data-target="#addProducerModal">新增</a></li>
-                        <li><a href="#" onclick="delProducer()">删除</a></li>
+                        <li><a >上一页</a></li>
+                        <li><a >下一页</a></li>
+                        <li><a  data-toggle="modal" data-target="#addProducerModal">新增</a></li>
+                        <li><a  onclick="delProducer()">删除</a></li>
                     </ul>
                 </nav>
             </div>

@@ -43,11 +43,11 @@
         <div>
             <h3 class="panel-title col-sm-2">商品销售</h3>
             <div class="col-sm-10">
-                <a href="#" style="float: right;margin: 5px" data-toggle="modal" data-target="#add"
+                <a  style="float: right;margin: 5px" data-toggle="modal" data-target="#add"
                    onclick="upOption('INSERT')">新增</a>
-                <a href="#" style="float: right;margin: 5px" onclick="addOrUpdateSell()">保存</a>
-                <a href="#" style="float: right;margin: 5px" onclick="upOption('DELETE')">删除</a>
-                <a href="#" style="float: right;margin: 5px" data-toggle="modal" data-target="#query">查询</a>
+                <a  style="float: right;margin: 5px" onclick="addOrUpdateSell()">保存</a>
+                <a  style="float: right;margin: 5px" onclick="upOption('DELETE')">删除</a>
+                <a  style="float: right;margin: 5px" data-toggle="modal" data-target="#query">查询</a>
             </div>
         </div>
     </div>
@@ -179,16 +179,16 @@
         <nav aria-label="Page navigation col-sm-11" style="text-align: center">
             <ul class="pagination">
                 <li>
-                    <a href="#" aria-label="Previous" onclick="previousUn()">
+                    <a  aria-label="Previous" onclick="previousUn()">
                         <span aria-hidden="true">上一页</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" aria-label="Next" onclick="nextUn()">
+                    <a  aria-label="Next" onclick="nextUn()">
                         <span aria-hidden="true">下一页</span>
                     </a>
                 </li>
-                <li > <a href="#" aria-label="confrim" onclick="confirmComplete()">
+                <li > <a  aria-label="confrim" onclick="confirmComplete()">
                     <span aria-hidden="true">确认</span>
                 </a></li>
             </ul>
@@ -236,12 +236,12 @@
         <nav aria-label="Page navigation col-sm-11" style="text-align: center">
             <ul class="pagination">
                 <li>
-                    <a href="#" aria-label="Previous" onclick="previous()">
+                    <a  aria-label="Previous" onclick="previous()">
                         <span aria-hidden="true">上一页</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" aria-label="Next" onclick="next()">
+                    <a  aria-label="Next" onclick="next()">
                         <span aria-hidden="true">下一页</span>
                     </a>
                 </li>
@@ -261,7 +261,7 @@
             <div class="modal-body">
                 <div class="col-sm-2" style="padding: 0px;">
                     <div class="list-group" style="margin-bottom: -1px;text-align: center">
-                        <a href="#" class="list-group-item active "
+                        <a  class="list-group-item active "
                            style="border-bottom-left-radius: 0px;border-bottom-right-radius: 0px;font-size: 10px;padding: 0px;min-height: 35px;text-align: center">
                             分类
                         </a>
@@ -273,12 +273,12 @@
                         <nav aria-label="Page navigation col-sm-11" style="text-align: center;">
                             <ul class="pagination" style="margin-top: 0px;padding-top: 0px;">
                                 <li>
-                                    <a href="#" aria-label="Previous" onclick="previousCategory()">
+                                    <a  aria-label="Previous" onclick="previousCategory()">
                                         <span aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" aria-label="Next" onclick="nextCategory()">
+                                    <a  aria-label="Next" onclick="nextCategory()">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
                                 </li>
@@ -304,12 +304,12 @@
                     <nav aria-label="Page navigation col-sm-11" style="text-align: center">
                         <ul class="pagination" style="margin-top: 0px;padding-top: 3px;">
                             <li>
-                                <a href="#" aria-label="Previous" onclick="previous1()">
+                                <a  aria-label="Previous" onclick="previous1()">
                                     <span aria-hidden="true">上一页</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#" aria-label="Next" onclick="next1()">
+                                <a  aria-label="Next" onclick="next1()">
                                     <span aria-hidden="true">下一页</span>
                                 </a>
                             </li>
@@ -358,7 +358,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" onclick="getSellByParams()">确定</button>
+                <button type="button" class="btn btn-primary" onclick="query()">确定</button>
             </div>
         </div>
     </div>

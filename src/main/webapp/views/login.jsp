@@ -84,7 +84,9 @@
             dataType: "json",
             success: function (data) {
                 if (data.success) {
-                    window.location.href="http://localhost:8080/Delphi/basic/";
+                    window.location.href="http://localhost:8080/Delphi/basic/in";
+                }else{
+                    alert(data.msg);
                 }
             }
         });

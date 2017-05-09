@@ -9,6 +9,8 @@
 <script src="<c:url value='/static/js/locales/bootstrap-datetimepicker.zh-CN.js'/>"></script>
 <script src="<c:url value='/static/templates/navbar.js'/> "></script>
 <script src="<c:url value='/static/js/Chart.js'/> "></script>
+<script src="<c:url value='/static/js/jquery.validate.min.js'/>"></script>
+<script src="<c:url value='/static/js/messages_zh.min.js'/>"></script>
 <script type="text/javascript" language="JavaScript">
     function showTitle(){
         var type = ${sessionScope.user.type};
@@ -35,7 +37,16 @@
         }
         return str;
     }
-
+    function formateTimestap(dateStr){
+        var time = new Date(dateStr);
+        var y = time.getFullYear();//年
+        var m = time.getMonth() + 1;//月
+        var d = time.getDate();//日
+        var h = time.getHours();//时
+        var mm = time.getMinutes();//分
+        var s = time.getSeconds();//秒
+        return y+"/"+m+"/"+d+" "+h+":"+mm+":"+s;
+    }
 </script>
 <%--
 <!-- /. FOOTER  -->

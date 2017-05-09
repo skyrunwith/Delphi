@@ -62,7 +62,7 @@
           <label for="beginTime" class="control-label">起始时间</label>
 
           <div class='input-group date' >
-            <input type='text' class="form-control" id='beginTime' readonly/>
+            <input type='text' class="form-control" id='beginTime' value="<%=new SimpleDateFormat("yyyy-MM").format(previous)%>" readonly/>
             <div class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
             </div>
@@ -74,7 +74,7 @@
           <label for="endTime" class="control-label">截止时间</label>
 
           <div class='input-group date' >
-            <input type='text' class="form-control" id='endTime' readonly/>
+            <input type='text' class="form-control" id='endTime' value="<%=new SimpleDateFormat("yyyy-MM").format(current)%>" readonly/>
             <div class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
             </div>
@@ -84,7 +84,7 @@
       <div class="col-sm-2">
         <div class="form-group">
           <label  class="control-label"></label>
-          <a class='btn btn-primary form-control'  onclick='getChartData1()' id="ds"  style="width: 50px;margin-top: 26px">查询</a>
+          <a class='btn btn-primary form-control'  onclick='getSellChartData()' id="ds"  style="width: 50px;margin-top: 26px">查询</a>
         </div>
       </div>
       <div class="col-sm-4">
@@ -93,7 +93,7 @@
         </div>
       </div>
       <div class="col-sm-5" >
-        <canvas id="myChart" height="450" width="600"></canvas>
+        <canvas id="mySellChart" height="450" width="600"></canvas>
         <div id="legend"></div>
       </div>
     </form>

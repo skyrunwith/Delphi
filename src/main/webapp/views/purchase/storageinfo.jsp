@@ -28,9 +28,9 @@
   <div>
     <nav aria-label="Page navigation col-sm-11" style="text-align: center" >
       <ul class="pagination">
-        <li><a href="#" onclick="previous()">上一页</a></li>
-        <li><a href="#" onclick="next()">下一页</a></li>
-        <%--<li><a href="#" data-target="#queryStorage" data-toggle="modal">查询</a></li>--%>
+        <li><a  onclick="previous()">上一页</a></li>
+        <li><a  onclick="next()">下一页</a></li>
+        <%--<li><a  data-target="#queryStorage" data-toggle="modal">查询</a></li>--%>
       </ul>
     </nav>
   </div>
